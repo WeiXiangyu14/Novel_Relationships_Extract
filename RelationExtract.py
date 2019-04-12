@@ -1,4 +1,5 @@
 import nltk
+from nltk.parse import CoreNLPParser
 nltk.download('punkt')
 
 
@@ -43,11 +44,31 @@ class RelationExtract:
                 # TODO: split text into CHAPTER
                 pass
 
+    def simple_ner(self):
+        ner_tagger = CoreNLPParser(url='http://localhost:9000', tagtype='ner')
+        names = []
+        f = open("namelist.txt", "w")
+
+        for i, stcs in enumerate(self.sentences):
+            nertag = list(ner_tagger.tag((stcs.split())))
+            namelist = [x[0] for x in nertag if x[1] == "PERSON"]
+            if i % 20 == 0:
+                print("processign: sentence", i, "of ", len(self.sentences))
+            for name in namelist:
+                if name not in names:
+                    names.append(name)
+                    f.write(name + "\n")
+        print(names)
+        f.close()
+
     def main(self):
         self.name_list = self.get_name_list()
         self.sentences = self.extract_sentence(self.path)
-        self.get_interest_stcs()
+        # self.get_interest_stcs()
+        self.simple_ner()
+
 
 if __name__ == '__main__':
     re = RelationExtract()
     re.main()
+
