@@ -9,3 +9,7 @@ Granger
 Dursley
 Mr. Dursley
 Mrs. Dursley
+He
+She
+Him
+Her

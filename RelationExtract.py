@@ -7,6 +7,7 @@ class RelationExtract:
         self.path = path
         self.name_list = None
         self.sentences = None
+        self.interest = []
 
     @staticmethod
     def extract_sentence(path):
@@ -24,17 +25,23 @@ class RelationExtract:
         return [name for name in names if len(name) > 0]
 
     def get_interest_stcs(self):
-        interest = []
         f = open("interest.txt", "w")
-        count = 0
         for stcs in self.sentences:
             for name in self.name_list:
                 if stcs.find(name) >= 0:
-                    interest.append(stcs)
+                    self.interest.append(stcs)
                     f.write(stcs + "\n")
                     break
-        print("Interested in ", len(interest), "sentences.")
+        print("Interested in ", len(self.interest), "sentences.")
         f.close()
+
+    def fine_tuning(self):
+        f = open("fine_sentences.txt", 'w')
+        for i, stcs in enumerate(self.sentences):
+            # First split text in CHAPTER
+            if stcs.find("CHAPTER"):
+                # TODO: split text into CHAPTER
+                pass
 
     def main(self):
         self.name_list = self.get_name_list()
