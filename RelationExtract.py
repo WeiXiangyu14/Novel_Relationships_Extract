@@ -64,8 +64,7 @@ class RelationExtract:
     def main(self):
         self.name_list = self.get_name_list()
         self.sentences = self.extract_sentence(self.path)
-        # self.get_interest_stcs()
-        self.simple_ner()
+        self.get_interest_stcs()
 
 
 if __name__ == '__main__':
