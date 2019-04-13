@@ -9,6 +9,8 @@ class RelationExtract:
         self.name_list = None
         self.sentences = None
         self.interest = []
+        self.chapters = []
+
 
     @staticmethod
     def extract_sentence(path):
@@ -17,6 +19,10 @@ class RelationExtract:
         f.close()
         sentences = nltk.tokenize.sent_tokenize(text)
         print("Totally ", len(sentences), "sentences.")
+        f = open("./sentences.txt", "w")
+        for stcs in sentences:
+            f.write(stcs + "\n")
+        f.close()
         return sentences
 
     @staticmethod
@@ -36,13 +42,21 @@ class RelationExtract:
         print("Interested in ", len(self.interest), "sentences.")
         f.close()
 
+    def get_chapters(self):     # split text into CHAPTER
+        chapter = []
+        for i, stcs in enumerate(self.sentences):
+            if "CHAPTER" in stcs.split():
+                if len(chapter) > 0:
+                    self.chapters.append(chapter)
+                    chapter = []
+            else:
+                chapter.append(stcs)
+
     def fine_tuning(self):
         f = open("fine_sentences.txt", 'w')
         for i, stcs in enumerate(self.sentences):
-            # First split text in CHAPTER
-            if stcs.find("CHAPTER"):
-                # TODO: split text into CHAPTER
-                pass
+            pass
+        f.close()
 
     def simple_ner(self):
         ner_tagger = CoreNLPParser(url='http://localhost:9000', tagtype='ner')
@@ -64,8 +78,8 @@ class RelationExtract:
     def main(self):
         self.name_list = self.get_name_list()
         self.sentences = self.extract_sentence(self.path)
-        self.get_interest_stcs()
-
+        self.fine_tuning()
+        self.get_chapters()
 
 if __name__ == '__main__':
     re = RelationExtract()
