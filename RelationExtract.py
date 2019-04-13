@@ -20,6 +20,7 @@ class RelationExtract:
         text = text.replace("\n\n", "\t")
         text = text.replace("\n", " ")
         text = text.replace("\t", "\n")
+        text = text.replace("\"\"", "\". \"")
         f.close()
         sentences = nltk.tokenize.sent_tokenize(text)
         print("Totally ", len(sentences), "sentences.")
@@ -66,7 +67,7 @@ class RelationExtract:
             stcs = self.sentences[i]
             n_cite = stcs.count("\"")
             if n_cite % 2 == 1:
-                count = stcs.count("\"")
+                count = n_cite
                 while count % 2 == 1:
                     i += 1
                     count += self.sentences[i].count("\"")
@@ -99,7 +100,7 @@ class RelationExtract:
     def main(self):
         self.name_list = self.get_name_list()
         self.sentences = self.extract_sentence(self.path)
-        self.fine_tuning()
+        # self.fine_tuning()
         self.get_chapters()
 
 if __name__ == '__main__':
