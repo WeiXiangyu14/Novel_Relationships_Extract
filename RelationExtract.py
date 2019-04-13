@@ -12,7 +12,6 @@ class RelationExtract:
         self.interest = []
         self.chapters = []
 
-
     @staticmethod
     def extract_sentence(path):
         f = open(path, 'r')
@@ -106,4 +105,8 @@ class RelationExtract:
 if __name__ == '__main__':
     re = RelationExtract()
     re.main()
+
+# TODO: Read this paper
+# https://aaai.org/ocs/index.php/WS/AAAIW17/paper/viewFile/15067/14772
+# https://pdfs.semanticscholar.org/330e/f0cf70ddb65da3b33d957fe813f2fcf710fe.pdf
 
