@@ -1,4 +1,5 @@
 import nltk
+import re
 from nltk.parse import CoreNLPParser
 nltk.download('punkt')
 
@@ -15,7 +16,10 @@ class RelationExtract:
     @staticmethod
     def extract_sentence(path):
         f = open(path, 'r')
-        text = f.read().replace("\n", " ")
+        text = f.read()
+        text = text.replace("\n\n", "\t")
+        text = text.replace("\n", " ")
+        text = text.replace("\t", "\n")
         f.close()
         sentences = nltk.tokenize.sent_tokenize(text)
         print("Totally ", len(sentences), "sentences.")
@@ -54,8 +58,25 @@ class RelationExtract:
 
     def fine_tuning(self):
         f = open("fine_sentences.txt", 'w')
-        for i, stcs in enumerate(self.sentences):
-            pass
+        fine_stcs = []
+        i = 0
+        while i < len(self.sentences):
+            # TODO: deal with mis-separation of "$Sentences".
+            # Problem: some little error in "" pairs.
+            stcs = self.sentences[i]
+            n_cite = stcs.count("\"")
+            if n_cite % 2 == 1:
+                count = stcs.count("\"")
+                while count % 2 == 1:
+                    i += 1
+                    count += self.sentences[i].count("\"")
+                    stcs += self.sentences[i]
+
+            i += 1
+            fine_stcs.append(stcs)
+            f.write(stcs + "\n")
+
+        # TODO: deal with talk and speaker
         f.close()
 
     def simple_ner(self):
