@@ -1,7 +1,13 @@
 import nltk
 import re
 from nltk.parse import CoreNLPParser
-nltk.download('punkt')
+from nltk.corpus import sentiwordnet as swn
+
+
+def download_corpus():
+    nltk.download('punkt')
+    nltk.download('sentiwordnet')
+    nltk.download('wordnet')
 
 
 class RelationExtract:
@@ -36,14 +42,29 @@ class RelationExtract:
         return [name for name in names if len(name) > 0]
 
     def get_interest_stcs(self):
-        f = open("interest.txt", "w")
+        f = open("role_gt_2.txt", "w")
+        role_gt_1 = []
+        role_gt_2 = []
+        # for stcs in self.sentences:
+        #     for name in self.name_list:
+        #         if stcs.find(name) >= 0:
+        #             role_gt_1.append(stcs)
+        #             f.write(stcs + "\n")
+        #             break
         for stcs in self.sentences:
+            num_roles = 0
+            roles = []
+            stcs_list = stcs.split()
             for name in self.name_list:
-                if stcs.find(name) >= 0:
-                    self.interest.append(stcs)
-                    f.write(stcs + "\n")
-                    break
-        print("Interested in ", len(self.interest), "sentences.")
+                if name in stcs_list:
+                    num_roles += 1
+                    roles.append(name)
+            if num_roles > 1:
+                role_gt_2.append(stcs)
+                f.write(stcs + "\n")
+                f.write(str(roles))
+                f.write("\n\n")
+        print("Interested in ", len(role_gt_2), "sentences that has >= 2 roles.")
         f.close()
 
     def get_chapters(self):     # split text into CHAPTER
@@ -101,6 +122,7 @@ class RelationExtract:
         self.sentences = self.extract_sentence(self.path)
         # self.fine_tuning()
         self.get_chapters()
+        self.get_interest_stcs()
 
 if __name__ == '__main__':
     re = RelationExtract()
