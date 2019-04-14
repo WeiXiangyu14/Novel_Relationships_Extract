@@ -17,6 +17,7 @@ class RelationExtract:
         self.sentences = None
         self.interest = []
         self.chapters = []
+        self.interact = {}
 
     @staticmethod
     def extract_sentence(path):
@@ -39,6 +40,7 @@ class RelationExtract:
     def get_name_list():
         f = open("./Corpus/namelist.txt")
         names = f.read().split('\n')
+        f.close()
         return [name for name in names if len(name) > 0]
 
     def get_interest_stcs(self):
@@ -64,7 +66,26 @@ class RelationExtract:
                 f.write(stcs + "\n")
                 f.write(str(roles))
                 f.write("\n\n")
+                for i in range(len(roles)):
+                    for j in range(i+1, len(roles)):
+                        if (roles[i], roles[j]) in self.interact:
+                            self.interact[roles[i], roles[j]] += 1
+                        else:
+                            self.interact[roles[i], roles[j]] = 1
         print("Interested in ", len(role_gt_2), "sentences that has >= 2 roles.")
+        f.close()
+
+    def print_interact(self):
+        f = open("interact.txt", 'w')
+        # for i, name1 in enumerate(self.name_list):
+        #     for j, name2 in enumerate(self.name_list):
+        #         if (name1, name2) in self.interact:
+        #             f.write(str(self.interact[name1, name2]) + " ")
+        #         else:
+        #             self.interact[name1, name2] = 0
+        #             f.write(str(self.interact[name1, name2]) + " ")
+        #     f.write("\n")
+        f.write(str(self.interact))
         f.close()
 
     def get_chapters(self):     # split text into CHAPTER
@@ -114,7 +135,6 @@ class RelationExtract:
                 if name not in names:
                     names.append(name)
                     f.write(name + "\n")
-        print(names)
         f.close()
 
     def main(self):
@@ -123,10 +143,11 @@ class RelationExtract:
         # self.fine_tuning()
         self.get_chapters()
         self.get_interest_stcs()
+        self.print_interact()
 
 if __name__ == '__main__':
-    re = RelationExtract()
-    re.main()
+    extractor = RelationExtract()
+    extractor.main()
 
 # TODO: Read this paper
 # https://aaai.org/ocs/index.php/WS/AAAIW17/paper/viewFile/15067/14772
