@@ -12,7 +12,9 @@ class NovelAnalyzer:
     current_person = ""
     current_people = []
     MAX_PEOPLE_NUM = 4
-    print_log = True
+    print_log = False
+    output_dialog = False
+    output_twopron_only = True
 
     end_token = [".", "!", "?"]
     out_dialog_token = ["said"]
@@ -59,6 +61,9 @@ class NovelAnalyzer:
                 # s_doc = self.nlp(s.string)
                 s_doc = s.as_doc()
                 s_ents = s_doc.ents
+                s_pron_num = self.calc_people_entity_num(s_doc)
+
+
                 s_people = []
 
                 for e in s_ents:
@@ -96,11 +101,21 @@ class NovelAnalyzer:
 
                     if self.print_log:
                         print(token.text, token.tag_, token_loc)
-                    fout.write(token.text)
+
+
                     if not in_dialog:
+                        if self.output_twopron_only:
+                            if s_pron_num >= 2:
+                                fout.write(token.text)
+                        else:
+                            fout.write(token.text)
                         if token.tag_ == "PRP":
                             # print("FIND PRP")
-                            fout.write("|||")
+                            if self.output_twopron_only:
+                                if s_pron_num >= 2:
+                                    fout.write("|||")
+                            else:
+                                fout.write("|||")
                             # if not self.current_people.empty():
                             #     fout.write(self.current_people.get())
                             #     fout.write("|||")
@@ -112,34 +127,94 @@ class NovelAnalyzer:
                                         allpeople = allpeople + pn
                                         allpeople = allpeople + "|"
                                 if not allpeople == "":
-                                    fout.write(allpeople)
-                                    fout.write("|||")
+                                    if self.output_twopron_only:
+                                        if s_pron_num >= 2:
+                                            fout.write(allpeople)
+                                            fout.write("|||")
+                                    else:
+                                        fout.write(allpeople)
+                                        fout.write("|||")
+                                    # fout.write(allpeople)
+                                    # fout.write("|||")
                                 else:
-                                    fout.write("UNKNOWN_PEOPLE_NAMES|||")
+                                    if self.output_twopron_only:
+                                        if s_pron_num >= 2:
+                                            fout.write("UNKNOWN_PEOPLE_NAMES|||")
+                                    else:
+                                        fout.write("UNKNOWN_PEOPLE_NAMES|||")
                             elif token.lower_ in self.third_person_token:
                                 if not self.current_person == "":
-                                    fout.write(self.current_person)
-                                    fout.write("|||")
+                                    if self.output_twopron_only:
+                                        if s_pron_num >= 2:
+                                            fout.write(self.current_person)
+                                            fout.write("|||")
+                                    else:
+                                        fout.write(self.current_person)
+                                        fout.write("|||")
                                 else:
-                                    fout.write("UNKNOWN_NAME|||")
+                                    if self.output_twopron_only:
+                                        if s_pron_num >= 2:
+                                            fout.write("UNKNOWN_NAME|||")
+                                    else:
+                                        fout.write("UNKNOWN_NAME|||")
                             elif token.lower_ in self.first_pron_token:
-                                # TODO: check whether "I" is in a dialog, process first pron
-                                fout.write("I_OUTSIDE_DIALOG")
-                                fout.write("|||")
+                                # TODO: check whether "I" is in a dialog, handle first pron
+                                if self.output_twopron_only:
+                                    if s_pron_num >= 2:
+                                        fout.write("I_OUTSIDE_DIALOG")
+                                        fout.write("|||")
+                                else:
+                                    fout.write("I_OUTSIDE_DIALOG")
+                                    fout.write("|||")
                             elif token.lower_ in self.second_pron_token:
-                                # TODO: check whether "you" is in a dialog, process second pron
-                                fout.write("YOU_OUTSIDE_DIALOG")
-                                fout.write("|||")
-                        fout.write(" ")
+                                # TODO: check whether "you" is in a dialog, handle second pron
+                                if self.output_twopron_only:
+                                    if s_pron_num >= 2:
+                                        fout.write("YOU_OUTSIDE_DIALOG")
+                                        fout.write("|||")
+                                else:
+                                    fout.write("YOU_OUTSIDE_DIALOG")
+                                    fout.write("|||")
+                            else:
+                                # TODO: check "it", decide whether replace
+                                if self.print_log:
+                                    print("Other pron: ", end="")
+                                    print(token.text)
+                                if self.output_twopron_only:
+                                    if s_pron_num >= 2:
+                                        fout.write("OTHER_PRON")
+                                        fout.write("|||")
+                                else:
+                                    fout.write("OTHER_PRON")
+                                    fout.write("|||")
+
+                        if self.output_twopron_only:
+                            if s_pron_num >= 2:
+                                fout.write(" ")
+                        else:
+                            fout.write(" ")
                     else:
-                        # TODO: Dialog check
-                        fout.write("[D]")
-                        fout.write(" ")
+                        # TODO: Dialog processing
+                        if self.output_dialog:
+                            fout.write(token.text)
+                            fout.write("[D]")
+                            fout.write(" ")
 
                     token_loc += len(token.text)
                     token_loc += 1
-                fout.write("\n\n")
-
+                if self.output_dialog:
+                    if self.output_twopron_only:
+                        if s_pron_num >= 2:
+                            fout.write("\n\n")
+                    else:
+                        fout.write("\n\n")
+                else:
+                    if not in_dialog:
+                        if self.output_twopron_only:
+                            if s_pron_num >= 2:
+                                fout.write("\n\n")
+                        else:
+                            fout.write("\n\n")
         fout.close()
 
     def output_origin_sentences(self, fileout):
@@ -156,6 +231,23 @@ class NovelAnalyzer:
             for i in range(self.MAX_PEOPLE_NUM-2, -1, -1):
                 self.current_people[i+1] = self.current_people[i]
             self.current_people[0] = pname
+
+    def calc_people_entity_num(self, s_doc):
+        res = 0
+        for token in s_doc:
+            if token.tag_ == "PRP":
+                if token.lower_ in self.third_people_token or token.lower_ in self.third_person_token:
+                    res += 1
+
+        s_ents = s_doc.ents
+        s_people = []
+        for e in s_ents:
+            if e.label_ == "PERSON":
+                if e.text not in s_people:
+                    s_people.append(e.text)
+        res += len(s_people)
+
+        return res
 
     def replace_pronoun(self):
         i = 1
