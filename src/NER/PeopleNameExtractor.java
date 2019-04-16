@@ -58,8 +58,18 @@ public class PeopleNameExtractor {
         }
         List<String> ls = new ArrayList<>(hs);
         Collections.sort(ls);
+        DistanceUtil dis = new DistanceUtil();
+        for (int i = 0; i < ls.size(); i++) {
+            for (int j = i + 1; j < ls.size(); j++) {
+                double sim = dis.jaro(ls.get(i), ls.get(j));
+                if (sim > 0.9) {
+                    ls.remove(j);
+                    j--;
+                }
+            }
+        }
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + "/name.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + "/name_jaro.txt"));
             for (String s : ls) {
                 writer.write(s + "\n");
             }
