@@ -7,10 +7,7 @@ import edu.stanford.nlp.ling.CoreAnnotations.AnswerAnnotation;
 import edu.stanford.nlp.util.StringUtils;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class PeopleNameExtractor {
     public static void main(String[] args) {
@@ -59,17 +56,33 @@ public class PeopleNameExtractor {
         List<String> ls = new ArrayList<>(hs);
         Collections.sort(ls);
         DistanceUtil dis = new DistanceUtil();
+//        // for Jaro
+//        for (int i = 0; i < ls.size(); i++) {
+//            for (int j = i + 1; j < ls.size(); j++) {
+//                double sim = dis.jaro(ls.get(i), ls.get(j));
+//                if (sim > 0.9) {
+//                    ls.remove(j);
+//                    j--;
+//                }
+//            }
+//        }
+        // for soundex
+        List<String> encoded = new ArrayList<>();
+        hs.clear();
+        for (String s : ls) encoded.add(dis.soundex(s));
         for (int i = 0; i < ls.size(); i++) {
-            for (int j = i + 1; j < ls.size(); j++) {
-                double sim = dis.jaro(ls.get(i), ls.get(j));
-                if (sim > 0.9) {
-                    ls.remove(j);
-                    j--;
-                }
+            if (!hs.contains(encoded.get(i))) {
+                hs.add(encoded.get(i));
+            }
+            else {
+                ls.remove(i);
+                encoded.remove(i);
+                i--;
             }
         }
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + "/name_jaro.txt"));
+            String filename = "/name_soundex.txt";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + filename));
             for (String s : ls) {
                 writer.write(s + "\n");
             }
