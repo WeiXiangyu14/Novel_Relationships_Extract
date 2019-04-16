@@ -38,11 +38,15 @@ class NovelAnalyzer:
     def extract_impt_sentences(self, mode):
         fout = open("pron_sentences.txt", "w")
         i = 0
+        in_dialog = False
         if mode == "pron":
             for s in self.sentences_origin:
                 i += 1
                 if i % 100 == 0:
                     print(i)
+
+                if in_dialog:
+                    in_dialog = False
 
                 # s_doc = self.nlp(s.string)
                 s_doc = s.as_doc()
@@ -59,53 +63,61 @@ class NovelAnalyzer:
                     # print(e.text, e.label_)
                 print()
                 print(s_people)
+                print(self.current_people)
                 print()
+
 
                 token_loc = 0
                 s_people_idx = 0
                 for token in s_doc:
-                    print("t: ", end="")
+                    if token.tag_ == "\'\'":
+                        in_dialog = not in_dialog
+                    if in_dialog:
+                        print("d: ", end="")
                     if len(s_people) > s_people_idx:
                         if token_loc >= s_people[s_people_idx][1]:
-                            print()
-                            print(s_people[s_people_idx])
-                            print()
+                            # print()
+                            # print(s_people[s_people_idx])
+                            # print()
                             person_name = s_people[s_people_idx][0]
                             self.add_person(person_name)
                             s_people_idx += 1
 
                     print(token.text, token.tag_, token_loc)
                     fout.write(token.text)
-                    if token.tag_ == "PRP":
-                        print("FIND PRP")
-                        fout.write("|||")
-                        # if not self.current_people.empty():
-                        #     fout.write(self.current_people.get())
-                        #     fout.write("|||")
-                        if not self.current_person == "":
-                            fout.write(self.current_person)
+                    if not in_dialog:
+                        if token.tag_ == "PRP":
+                            print("FIND PRP")
                             fout.write("|||")
-                        else:
-                            fout.write("UNKNOWN_NAME|||")
-                    fout.write(" ")
+                            # if not self.current_people.empty():
+                            #     fout.write(self.current_people.get())
+                            #     fout.write("|||")
+
+                            if token.lower_ == "they" or token.lower_ == "them":
+                                allpeople = ""
+                                for pn in self.current_people:
+                                    if not pn == "":
+                                        allpeople = allpeople + pn
+                                        allpeople = allpeople + "|"
+                                if not allpeople == "":
+                                    fout.write(allpeople)
+                                    fout.write("|||")
+                                else:
+                                    fout.write("UNKNOWN_PEOPLE_NAMES|||")
+                            else:
+                                if not self.current_person == "":
+                                    fout.write(self.current_person)
+                                    fout.write("|||")
+                                else:
+                                    fout.write("UNKNOWN_NAME|||")
+                        fout.write(" ")
+                    else:
+                        # TODO: Dialog check
+                        None
+
                     token_loc += len(token.text)
                     token_loc += 1
                 fout.write("\n\n")
-
-
-                # prons = self.extract_tokens(s, mode)
-                # if len(prons) > 0:
-                #     self.sentences_important.append(s)
-                #     str = s.string
-                #
-                #     fout.write(str)
-                #     fout.write("\n")
-                #     fout.write("\n")
-                    # for p in prons:
-                    #     fout.write(p.string)
-                    #     fout.write(" ")
-                    # fout.write("\n")
-                    # fout.write("\n")
 
         fout.close()
 
@@ -119,10 +131,10 @@ class NovelAnalyzer:
 
     def add_person(self, pname):
         self.current_person = pname
-
-        for i in range(self.MAX_PEOPLE_NUM-1):
-            self.current_people[i+1] = self.current_people[i]
-        self.current_people[0] = pname
+        if not pname == self.current_people[0]:
+            for i in range(self.MAX_PEOPLE_NUM-2, -1, -1):
+                self.current_people[i+1] = self.current_people[i]
+            self.current_people[0] = pname
 
     def replace_pronoun(self):
         i = 1
