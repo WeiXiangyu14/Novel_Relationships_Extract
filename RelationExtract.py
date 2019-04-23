@@ -2,6 +2,7 @@ import nltk
 import re
 from nltk.parse import CoreNLPParser
 from nltk.corpus import sentiwordnet as swn
+import stanfordnlp
 
 
 def download_corpus():
@@ -18,6 +19,7 @@ class RelationExtract:
         self.interest = []
         self.chapters = []
         self.interact = {}
+        self.nlp = stanfordnlp.Pipeline()
 
     @staticmethod
     def extract_sentence(path):
@@ -63,6 +65,9 @@ class RelationExtract:
                     roles.append(name)
             if num_roles > 1:
                 role_gt_2.append(stcs)
+                doc = self.nlp(stcs)
+                doc.sentences[0].print_dependencies()
+
                 f.write(stcs + "\n")
                 f.write(str(roles))
                 f.write("\n\n")
@@ -144,6 +149,7 @@ class RelationExtract:
         self.get_chapters()
         self.get_interest_stcs()
         self.print_interact()
+
 
 if __name__ == '__main__':
     extractor = RelationExtract()
