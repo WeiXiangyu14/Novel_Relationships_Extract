@@ -66,10 +66,19 @@ class RelationExtract:
             if num_roles > 1:
                 role_gt_2.append(stcs)
                 doc = self.nlp(stcs)
-                doc.sentences[0].print_dependencies()
+                nsubj = []
+                root = None
+                for dep_edge in doc.sentences[0].dependencies:
+                    # print(dep_edge[2].text, dep_edge[0].index, dep_edge[1])
+                    if dep_edge[1] == "root":
+                        root = dep_edge[2].text
+                    if dep_edge[1] == "nsubj":
+                        nsubj.append(dep_edge[2].text)
 
                 f.write(stcs + "\n")
-                f.write(str(roles))
+                f.write(str(roles) + "\n")
+                f.write(str(root) + "\n")
+                f.write(str(nsubj) + "\n")
                 f.write("\n\n")
                 for i in range(len(roles)):
                     for j in range(i+1, len(roles)):
