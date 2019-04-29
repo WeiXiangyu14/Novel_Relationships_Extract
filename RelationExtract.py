@@ -18,7 +18,9 @@ class RelationExtract:
         self.sentences = None
         self.interest = []
         self.chapters = []
-        self.interact = {}
+        self.interact = {}  # Count how many times two roles interact.
+        self.interact_pos = {}  # Count how many times two roles interact positively.
+        self.interact_neg = {}  # Count how many times two roles interact negatively.
         self.nlp = stanfordnlp.Pipeline()
 
     @staticmethod
@@ -57,37 +59,55 @@ class RelationExtract:
         #             break
         for stcs in self.sentences:
             num_roles = 0
-            roles = []
+            roles = []  # Stores the roles show up in this sentence
             stcs_list = stcs.split()
             for name in self.name_list:
                 if name in stcs_list:
                     num_roles += 1
                     roles.append(name)
-            if num_roles > 1:
-                role_gt_2.append(stcs)
-                doc = self.nlp(stcs)
-                nsubj = []
-                root = None
-                for dep_edge in doc.sentences[0].dependencies:
-                    # print(dep_edge[2].text, dep_edge[0].index, dep_edge[1])
-                    if dep_edge[1] == "root":
-                        root = dep_edge[2].text
-                    if dep_edge[1] == "nsubj":
-                        nsubj.append(dep_edge[2].text)
+            if num_roles < 2:
+                continue
 
-                f.write(stcs + "\n")
-                f.write(str(roles) + "\n")
-                f.write(str(root) + "\n")
-                f.write(str(nsubj) + "\n")
-                f.write("\n\n")
-                for i in range(len(roles)):
-                    for j in range(i+1, len(roles)):
-                        if (roles[i], roles[j]) in self.interact:
-                            self.interact[roles[i], roles[j]] += 1
-                        else:
-                            self.interact[roles[i], roles[j]] = 1
+            role_gt_2.append(stcs)
+            doc = self.nlp(stcs)
+
+            get_sentiment = self.sentiment_analysis(stcs)
+
+            nsubj = []
+            root = None
+            for dep_edge in doc.sentences[0].dependencies:
+                print(dep_edge[2].text, dep_edge[0].index, dep_edge[1])
+                if dep_edge[1] == "root":
+                    root = dep_edge[2].text
+                if dep_edge[1] == "nsubj":
+                    nsubj.append(dep_edge[2].text)
+
+            f.write(stcs + "\n")
+            f.write(str(roles) + "\n")
+            f.write(str(root) + "\n")
+            f.write(str(nsubj) + "\n")
+            f.write("\n\n")
+
+            for i in range(len(roles)):
+                for j in range(i+1, len(roles)):
+                    # Sort the names by up-order
+                    if roles[i] > roles[j]:
+                        name1, name2 = roles[j], roles[i]
+                    else:
+                        name1, name2 = roles[i], roles[j]
+
+                    if (name1, name2) in self.interacts in self.interact:
+                        self.interact[name1, name2] += 1
+                    else:
+                        self.interact[name1, name2] = 1
+
         print("Interested in ", len(role_gt_2), "sentences that has >= 2 roles.")
         f.close()
+
+    @staticmethod
+    def sentiment_analysis(sentence):
+        # TODO: to be implemented
+        return 0
 
     def print_interact(self):
         f = open("interact.txt", 'w')
@@ -144,7 +164,7 @@ class RelationExtract:
             nertag = list(ner_tagger.tag((stcs.split())))
             namelist = [x[0] for x in nertag if x[1] == "PERSON"]
             if i % 20 == 0:
-                print("processign: sentence", i, "of ", len(self.sentences))
+                print("processing: sentence", i, "of ", len(self.sentences))
             for name in namelist:
                 if name not in names:
                     names.append(name)
