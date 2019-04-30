@@ -9,6 +9,7 @@ import numpy as np
 import PIL
 from PIL import Image
 import matplotlib.pyplot as plt
+from sklearn.cluster import SpectralClustering
 
 
 def download_corpus():
@@ -202,6 +203,10 @@ class RelationExtract:
         im = Image.fromarray(senti_mat)
         im.save("interact.jpeg")
         return im
+
+    def cluster_analyze(self):
+        # TODO: try spectral cluster
+        pass
 
     def main(self):
         self.get_name_list()
