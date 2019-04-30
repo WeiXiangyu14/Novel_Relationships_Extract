@@ -5,6 +5,8 @@ from nltk.corpus import sentiwordnet as swn
 import stanfordnlp
 import spacy
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
+import numpy as np
+
 
 def download_corpus():
     nltk.download('punkt')
@@ -12,6 +14,7 @@ def download_corpus():
     nltk.download('wordnet')
     nltk.download('vader_lexicon')
 # download_corpus()
+
 
 class RelationExtract:
     def __init__(self, path="./Corpus/Harry Potter and the Sorcerer's Stone.txt"):
@@ -25,6 +28,11 @@ class RelationExtract:
         self.interact_neg = {}  # Count how many times two roles interact negatively.
         self.nlp = stanfordnlp.Pipeline()
         self.sentim_analyzer = SIA()
+
+        self.name2int = {}
+        self.int2name = {}
+
+        self.pos_mat = None
 
     @staticmethod
     def extract_sentence(path):
@@ -43,11 +51,15 @@ class RelationExtract:
         f.close()
         return sentences
 
-    @staticmethod
-    def get_name_list():
+    def get_name_list(self):
         f = open("./Corpus/namelist.txt")
         names = f.read().split('\n')
         f.close()
+        self.name_list = names
+
+        for index, name in enumerate(self.name_list):
+            self.name2int[name] = index
+            self.int2name[index] = name
         return [name for name in names if len(name) > 0]
 
     def get_interest_stcs(self):
@@ -124,14 +136,6 @@ class RelationExtract:
 
     def print_interact(self):
         f = open("interact.txt", 'w')
-        # for i, name1 in enumerate(self.name_list):
-        #     for j, name2 in enumerate(self.name_list):
-        #         if (name1, name2) in self.interact:
-        #             f.write(str(self.interact[name1, name2]) + " ")
-        #         else:
-        #             self.interact[name1, name2] = 0
-        #             f.write(str(self.interact[name1, name2]) + " ")
-        #     f.write("\n")
         f.write(str(self.interact))
         f.close()
 
@@ -164,7 +168,6 @@ class RelationExtract:
             i += 1
             fine_stcs.append(stcs)
             f.write(stcs + "\n")
-
         # TODO: deal with talk and speaker
         f.close()
 
@@ -184,8 +187,18 @@ class RelationExtract:
                     f.write(name + "\n")
         f.close()
 
+    def get_sentiment_mat(self):
+        self.pos_mat = np.zeros((len(self.name_list, self.name_list)))
+        for name1 in self.name_list:
+            i = self.name2int[name1]
+            for name2 in self.name_list:
+                j = self.name2int[name2]
+                if (name1, name2) in self.interact_pos:
+                    self.pos_mat[i, j] += self.interact_pos[name1, name2]
+        # TODO: cluster analyzing
+
     def main(self):
-        self.name_list = self.get_name_list()
+        self.get_name_list()
         self.sentences = self.extract_sentence(self.path)
         # self.fine_tuning()
         self.get_chapters()
