@@ -3,13 +3,15 @@ import re
 from nltk.parse import CoreNLPParser
 from nltk.corpus import sentiwordnet as swn
 import stanfordnlp
-
+import spacy
+from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 
 def download_corpus():
     nltk.download('punkt')
     nltk.download('sentiwordnet')
     nltk.download('wordnet')
-
+    nltk.download('vader_lexicon')
+# download_corpus()
 
 class RelationExtract:
     def __init__(self, path="./Corpus/Harry Potter and the Sorcerer's Stone.txt"):
@@ -22,6 +24,7 @@ class RelationExtract:
         self.interact_pos = {}  # Count how many times two roles interact positively.
         self.interact_neg = {}  # Count how many times two roles interact negatively.
         self.nlp = stanfordnlp.Pipeline()
+        self.sentim_analyzer = SIA()
 
     @staticmethod
     def extract_sentence(path):
@@ -71,7 +74,7 @@ class RelationExtract:
             role_gt_2.append(stcs)
             doc = self.nlp(stcs)
 
-            get_sentiment = self.sentiment_analysis(stcs)
+            pos, neg = self.sentiment_analysis(stcs)
 
             nsubj = []
             root = None
@@ -96,18 +99,22 @@ class RelationExtract:
                     else:
                         name1, name2 = roles[i], roles[j]
 
-                    if (name1, name2) in self.interacts in self.interact:
+                    if (name1, name2) in self.interact in self.interact:
                         self.interact[name1, name2] += 1
                     else:
                         self.interact[name1, name2] = 1
 
+                    self.interact_pos[name1, name2] += pos
+                    self.interact_neg[name1, name2] += neg
+
         print("Interested in ", len(role_gt_2), "sentences that has >= 2 roles.")
         f.close()
 
-    @staticmethod
-    def sentiment_analysis(sentence):
-        # TODO: to be implemented
-        return 0
+    def sentiment_analysis(self, stcs):
+        analyze = self.sentim_analyzer.polarity_scores(stcs)
+        pos = analyze["pos"]
+        neg = analyze["neg"]
+        return pos, neg
 
     def print_interact(self):
         f = open("interact.txt", 'w')
