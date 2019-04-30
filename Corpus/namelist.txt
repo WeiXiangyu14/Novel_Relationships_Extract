@@ -1,211 +1,191 @@
-Harry
-Potter
-Dursley
-Dudley
-Dursleys
-Harvey
-Harold
-Next
-Jim
-McGuffin
-Ted
-Howard
-Petunia
-Albus
-Dumbledore
-McGonagall
-Dedalus
-Diggle
-Voldemort
-Pomfrey
-Godric
-Lily
-James
-Hagrid
-Duddy
-Vernon
-Marge
-Figg
-Tibbles
-Paws
-Tufty
-Yvonne
-Dinky
-Duddydums
-Piers
-Polkiss
-Boa
-Constrictor
-MR. DURSLEY
-Dennis
-Malcolm
-Gordon
-Hunting
-Ickle
-Dudleykins
-Wight
-H. Potter
-Rubeus
-ALBUS
-DUMBLEDORE
-Warlock
-Minerva
-Gallopin
-Knuts
-Gringotts
-Fer
-Cornelius
-Fudge
-Phyllida
-Newt
-Scamander
-Quentin
-Trimble
-Tom
-Doris
-Crockford
-Quirrell
-Diagon
-Alley
-Sickles
-Brown
-Griphook
-Malkin
-Hufflepuff
-Slytherin
-Vindictus
-Viridian
-Ollivander
-Yew
-Beechwood
-Don
-Hedwig
-Ginny
-Percy
-Fred
-George
-Ron
-Neville
-Lee
-Ronnie
-Mother
-Weasley
-Mom
-Muggles
-Bill
-Charlie
-Scabbers
-Bettie
-Bott
-Agrippa
-Nicolas
-Flamel
-Morgana
-Hengist
-Alberic
-Grunnion
-Merlin
-Cliodna
-Bertie
-Hermione
-Granger
-Ravenclaw
-Prophet
-Know-Who
-Malfoy
-Draco
-Goyle
-Hufflepuffis
-Abbott
-Hannah
-Susan
-Terry
-Brocklehurst
-Mandy
-Millicent
-Justin
-Finnigan
-Seamus
-Longbottom
-Crabbe
-Patil
-Sally-Anne
-Quirtell
-Thomas
-Dean
-Turpin
-Lisa
-Blaise
-Nicholas
-de
-Mimsy-Porpington
-Headless
-Nick
-Mimsy
-Algie
-Enid
-Gran
-Snape
-Ahern
-Filch
-Hooch
-Norris
-Binns
-Flitwick
-Fang
-chasin
-Fitch
-Slytherins
-Malfay
-Parvati
-Pansy
-Parkinson
-Remembrall
-HARRY
-POTTER
-Wood
-Oliver
-Severus
-Jordan
-Gregory
-Smarmy
-HALLOWEEN
-Wizard
-Baruffio
-Hermlone
-Chaser
-Angelina
-Johnson
-Marcus
-Flint
-Alicia
-Spinnet
-Katie
-Bell
-Adrian
-Pucey
-Bletchley
-Seeker
-Terence
-Higgs
-Golden
-Snitch
-Pince
-Gred
-Weasleys
-Ronald
-NICOLAS
-FLAMEL
-Perenelle
-Pomftey
-Fluffy
-Norbert
-Gryffindors
-Hufflepuffs
-Ronan
-Firenze
-Bane
-Gryffindor
-Trevor
-Baron
-Peevsie
+ALBUS - DUMBLEDORE 
+Abbott 
+Adrian Pucey 
+Agrippa 
+Ahern 
+Alberic Grunnion 
+Algie 
+Alicia Spinnet 
+Angelina Johnson 
+Aunt Petunia 
+Auntie Marge 
+Bane 
+Baron 
+Beechwood 
+Bell 
+Bertie Bott 
+Bettie Bott 
+Binns 
+Blaise 
+Bletchley 
+Boa Constrictor 
+Brocklehurst 
+Charlie 
+Charlie Weasley 
+Chaser Angelina Johnson 
+Chaser Bell 
+Chaser Katie Bell 
+Cliodna 
+Cornelius Fudge 
+Crabbe 
+Dean 
+Dean Thomas 
+Dedalus Diggle 
+Dennis 
+Devil 
+Diagon Alley 
+Diggle 
+Dinky Duddydums 
+Doris Crockford 
+Draco Malfoy 
+Du 
+Duddy 
+Dudley 
+Dudley Dursley 
+Dumbledore 
+Dursley 
+Enid 
+Fang 
+Fer Dumbledore 
+Fetchin 
+Figg 
+Filch 
+Finnigan 
+Firenze 
+Fitch 
+Flamel 
+Flitwick 
+Fluffy 
+Fred 
+Fred Weasley 
+George 
+George Weasley 
+Ginny 
+Ginny Weasley 
+Given Harry 
+Godric 
+Golden Snitch 
+Gordon 
+Goyle 
+Gran 
+Granger 
+Gred 
+Gregory the Smarmy 
+Griphook 
+Gryffindor 
+H. Potter 
+HALLOWEEN Malfoy 
+HARRY POTTER 
+Hagrid 
+Hannah 
+Harold 
+Harry 
+Harry Hunting 
+Harvey 
+Headless Nick 
+Hedwig 
+Hengist 
+Hermione 
+Hermlone 
+Higgs 
+Howard 
+Hufflepuff 
+Hut-on-the-Rock 
+Ickle Dudleykins 
+James 
+James Potter 
+Jim 
+Jim McGuffin 
+Johnson 
+Jordan 
+Justin 
+Know-Who 
+Knuts 
+Lee 
+Lee Jordan 
+Lily 
+Lisa 
+Longbottom 
+MR. DURSLEY 
+Madam Hooch 
+Madam Malkin 
+Madam Pince 
+Malcolm 
+Malfay 
+Mandy 
+Marcus Flint 
+Marge 
+McGonagall 
+Merlin 
+Millicent 
+Minerva McGonagall 
+Miss Granger 
+Mom 
+Morgana 
+Mother 
+NICOLAS FLAMEL Dumbledore 
+Neville 
+Neville Longbottom 
+Newt Scamander 
+Next Door 
+Nick 
+Norbert 
+Norris 
+Oak 
+Oliver 
+Ollivander 
+POTTER 
+Pansy Parkinson 
+Parvati Patil 
+Patil 
+Paws 
+Peevsie 
+Percy 
+Percy Weasley 
+Perenelle 
+Petunia 
+Phyllida 
+Piers Polkiss 
+Quentin Trimble 
+Quirrell 
+Quirtell 
+Ravenclaw 
+Remembrall 
+Ron 
+Ron - Ron 
+Ron Weasley 
+Ronald Weasley 
+Ronan 
+Rubeus Hagrid 
+Sally-Anne 
+Scabbers 
+Seamus 
+Seamus Finnigan 
+Sickles 
+Slytherin 
+Smeltings 
+Snape 
+Susan 
+Ted 
+Terence Higgs 
+Terry 
+Thomas 
+Tibbles 
+Tom 
+Trevor 
+Tufty 
+Turpin 
+Uncle Vernon 
+Vernon 
+Vindictus Viridian 
+Voldemort 
+WEASLEY 
+Warlock 
+Weasleys 
+Wight 
+Wizard Baruffio 
+Wood 
+Ye 
+You-Know 
+Yvonne 
+chasin 

@@ -6,6 +6,9 @@ import stanfordnlp
 import spacy
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 import numpy as np
+import PIL
+from PIL import Image
+import matplotlib.pyplot as plt
 
 
 def download_corpus():
@@ -66,12 +69,6 @@ class RelationExtract:
         f = open("role_gt_2.txt", "w")
         role_gt_1 = []
         role_gt_2 = []
-        # for stcs in self.sentences:
-        #     for name in self.name_list:
-        #         if stcs.find(name) >= 0:
-        #             role_gt_1.append(stcs)
-        #             f.write(stcs + "\n")
-        #             break
         for stcs in self.sentences:
             num_roles = 0
             roles = []  # Stores the roles show up in this sentence
@@ -191,15 +188,20 @@ class RelationExtract:
                     f.write(name + "\n")
         f.close()
 
-    def get_sentiment_mat(self):
-        self.pos_mat = np.zeros((len(self.name_list, self.name_list)))
+    def get_sentiment_mat(self, senti_dict):
+        senti_mat = np.zeros((len(self.name_list), len(self.name_list)))
         for name1 in self.name_list:
             i = self.name2int[name1]
             for name2 in self.name_list:
                 j = self.name2int[name2]
-                if (name1, name2) in self.interact_pos:
-                    self.pos_mat[i, j] += self.interact_pos[name1, name2]
-        # TODO: cluster analyzing
+                if (name1, name2) in senti_dict:
+                    senti_mat[i, j] = senti_dict[name1, name2]
+        return senti_mat
+
+    def create_senti_image(self, senti_mat):
+        im = Image.fromarray(senti_mat)
+        im.save("interact.jpeg")
+        return im
 
     def main(self):
         self.get_name_list()
@@ -208,6 +210,9 @@ class RelationExtract:
         self.get_chapters()
         self.get_interest_stcs()
         self.print_interact()
+        interact_mat = self.get_sentiment_mat(self.interact)
+        plt.matshow(interact_mat)
+        plt.show()
 
 
 if __name__ == '__main__':
