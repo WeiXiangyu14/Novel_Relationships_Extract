@@ -89,18 +89,22 @@ class RelationExtract:
             pos, neg = self.sentiment_analysis(stcs)
 
             nsubj = []
+            obj = []
             root = None
             for dep_edge in doc.sentences[0].dependencies:
-                print(dep_edge[2].text, dep_edge[0].index, dep_edge[1])
+                # print(dep_edge[2].text, dep_edge[0].index, dep_edge[1])
                 if dep_edge[1] == "root":
                     root = dep_edge[2].text
                 if dep_edge[1] == "nsubj":
                     nsubj.append(dep_edge[2].text)
+                if dep_edge[1] == "obj":
+                    obj.append(dep_edge[2].text)
 
             f.write(stcs + "\n")
             f.write(str(roles) + "\n")
             f.write(str(root) + "\n")
             f.write(str(nsubj) + "\n")
+            f.write(str(obj) + "\n")
             f.write("\n\n")
 
             for i in range(len(roles)):
