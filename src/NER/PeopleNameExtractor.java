@@ -10,6 +10,17 @@ import java.io.*;
 import java.util.*;
 
 public class PeopleNameExtractor {
+    static boolean containword(String a, String b) {
+        a = a.replaceAll("-", " ");
+        b = b.replaceAll("-", " ");
+        String[] as = a.split(" ");
+        String[] bs = b.split(" ");
+        HashSet<String> hs = new HashSet<>(Arrays.asList(as));
+        for (String s : bs) {
+            if (!hs.contains(s)) return false;
+        }
+        return true;
+    }
     public static void main(String[] args) {
         String serializedClassifier = "/home/karry/NYU/Spring2019/nlp/assignment/project/stanford-ner/" +
                 "classifiers/english.all.3class.distsim.crf.ser.gz";
@@ -38,13 +49,15 @@ public class PeopleNameExtractor {
 //            }
 //            System.out.println();
 //        }
+        Map<String, List<String>> map = new HashMap<>();
         List<List<CoreLabel>> o = classifier.classifyFile(filePath);
         HashSet<String> hs = new HashSet<>();
         StringBuilder sb = new StringBuilder();
         for (List<CoreLabel> sentence : o) {
             for (CoreLabel word : sentence) {
                 if (word.get(AnswerAnnotation.class).compareTo("PERSON") == 0) {
-                    sb.append(word.word());
+                    if (word.word().compareTo("-") == 0) continue;
+                    sb.append(word.word().toLowerCase());
                     sb.append(' ');
                 }
                 else if (sb.length() > 0) {
@@ -54,37 +67,56 @@ public class PeopleNameExtractor {
             }
         }
         List<String> ls = new ArrayList<>(hs);
-        Collections.sort(ls);
+        ls.sort(Collections.reverseOrder());
         DistanceUtil dis = new DistanceUtil();
-//        // for Jaro
-//        for (int i = 0; i < ls.size(); i++) {
-//            for (int j = i + 1; j < ls.size(); j++) {
-//                double sim = dis.jaro(ls.get(i), ls.get(j));
-//                if (sim > 0.9) {
-//                    ls.remove(j);
-//                    j--;
-//                }
-//            }
-//        }
-        // for soundex
-        List<String> encoded = new ArrayList<>();
-        hs.clear();
-        for (String s : ls) encoded.add(dis.soundex(s));
+        // for Jaro
         for (int i = 0; i < ls.size(); i++) {
-            if (!hs.contains(encoded.get(i))) {
-                hs.add(encoded.get(i));
-            }
-            else {
-                ls.remove(i);
-                encoded.remove(i);
-                i--;
+            for (int j = i + 1; j < ls.size(); j++) {
+                double sim = dis.jaro(ls.get(i), ls.get(j));
+                if (sim > 0.9 || containword(ls.get(i), ls.get(j))) { // deal with "A B" vs "A"
+                    String val = ls.get(j), key = ls.get(i);
+                    List<String> list = map.getOrDefault(key, new ArrayList<>());
+                    list.add(val);
+                    map.put(key, list);
+                    ls.remove(j);
+                    j--;
+                }
             }
         }
+//        // for soundex
+//        List<String> encoded = new ArrayList<>();
+//        hs.clear();
+//        for (String s : ls) encoded.add(dis.soundex(s));
+//        for (int i = 0; i < ls.size(); i++) {
+//            if (!hs.contains(encoded.get(i))) {
+//                hs.add(encoded.get(i));
+//            }
+//            else {
+//                ls.remove(i);
+//                encoded.remove(i);
+//                i--;
+//            }
+//        }
         try {
-            String filename = "/name_soundex.txt";
+            String filename = "/name_jaro.txt";
             BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + filename));
             for (String s : ls) {
                 writer.write(s + "\n");
+            }
+            writer.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            String dictname = "/dict.txt";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + dictname));
+            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+                String s = entry.getKey().trim();
+                for (String val : entry.getValue()) {
+                    s += (", " + val.trim());
+                }
+                String key = entry.getKey().trim().replaceAll(" ", "_").toUpperCase();
+                writer.write(key + ": " + s + "\n");
             }
             writer.close();
         } catch (Exception e) {

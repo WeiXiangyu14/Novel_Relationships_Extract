@@ -1,0 +1,36 @@
+RUBEUS_HAGRID: rubeus hagrid, hagrid hagrid, hagrid
+FRED_WEASLEY: fred weasley, fred
+CHASER_ANGELINA_JOHNSON: chaser angelina johnson, angelina johnson
+QUIRTELL: quirtell, quirrell
+MALFOY: malfoy, malfay
+ALBUS_DUMBLEDORE: albus dumbledore, albus dumbled, albus
+MINERVA_MCGONAGALL: minerva mcgonagall, mcgonagall
+OLIVER_WOOD: oliver wood, oliver
+GINNY_WEASLEY: ginny weasley, ginny
+NEVILLE_LONGBOTTOM: neville longbottom, neville, longbottom
+JAMES_POTTER: james potter, james
+HUFFLEPUFFS: hufflepuffs, hufflepuffis, hufflepuff
+NICOLAS_FLAMEL_DUMBLEDORE: nicolas flamel dumbledore, nicolas flamel, nicolas, flamel, dumbledore
+BETTIE_BOTT: bettie bott, bertie bott
+MISS_GRANGER: miss granger, granger
+RON_WEASLEY: ron weasley, ron ron, ron
+PIERS_POLKISS: piers polkiss, piers
+SLYTHERINS: slytherins, slytherin
+SEVERUS_SNAPE: severus snape, severus
+LEE_JORDAN: lee jordan, lee, jordan
+CHASER_KATIE_BELL: chaser katie bell, chaser bell, bell
+MADAM_POMFTEY: madam pomftey, madam pomfrey
+WEASLEYS: weasleys, weasley
+GEORGE_WEASLEY: george weasley, george
+YEW: yew, ye
+CHARLIE_WEASLEY: charlie weasley, charlie
+DEAN_THOMAS: dean thomas, dean
+SEAMUS_FINNIGAN: seamus finnigan, seamus, finnigan
+NICHOLAS_DE_MIMSY-PORPINGTON: nicholas de mimsy-porpington, nicholas de mimsy, nicholas
+PERCY_WEASLEY: percy weasley, percy
+DUDLEY_DURSLEY: dudley dursley, dudley
+TERENCE_HIGGS: terence higgs, higgs
+MCGONAGALL_HARRY: mcgonagall harry, harry
+JIM_MCGUFFIN: jim mcguffin, jim
+VERNON_DURSLEY: vernon dursley, vernon, dursley
+HERMLONE: hermlone, hermione
