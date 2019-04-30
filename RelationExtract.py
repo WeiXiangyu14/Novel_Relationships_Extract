@@ -99,13 +99,19 @@ class RelationExtract:
                     else:
                         name1, name2 = roles[i], roles[j]
 
-                    if (name1, name2) in self.interact in self.interact:
+                    if (name1, name2) in self.interact:
                         self.interact[name1, name2] += 1
                     else:
                         self.interact[name1, name2] = 1
 
-                    self.interact_pos[name1, name2] += pos
-                    self.interact_neg[name1, name2] += neg
+                    if (name1, name2) in self.interact_pos:
+                        self.interact_pos[name1, name2] += pos
+                    else:
+                        self.interact_pos[name1, name2] = pos
+                    if (name1, name2) in self.interact_neg:
+                        self.interact_neg[name1, name2] += neg
+                    else:
+                        self.interact_neg[name1, name2] = neg
 
         print("Interested in ", len(role_gt_2), "sentences that has >= 2 roles.")
         f.close()
