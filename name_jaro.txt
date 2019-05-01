@@ -1,213 +1,174 @@
-ALBUS - DUMBLEDORE 
-Abbott 
-Adrian Pucey 
-Agrippa 
-Ahern 
-Alberic Grunnion 
-Albus 
-Albus Dumbled 
-Algie 
-Alicia Spinnet 
-Angelina Johnson 
-Aunt Petunia 
-Auntie Marge 
-Bane 
-Baron 
-Beechwood 
-Bell 
-Bertie Bott 
-Bill 
-Binns 
-Blaise 
-Bletchley 
-Boa Constrictor 
-Brocklehurst 
-Brown 
-Charlie 
-Charlie Weasley 
-Chaser Angelina Johnson 
-Chaser Bell 
-Chaser Katie Bell 
-Cliodna 
-Cornelius Fudge 
-Crabbe 
-Dean 
-Dean Thomas 
-Dedalus Diggle 
-Dennis 
-Devil 
-Diagon Alley 
-Diggle 
-Dinky Duddydums 
-Don 
-Doris Crockford 
-Draco Malfoy 
-Du 
-Duddy 
-Dudley 
-Dudley Dursley 
-Dumbledore 
-Dursley 
-Enid 
-Fang 
-Fer Dumbledore 
-Fetchin 
-Figg 
-Filch 
-Finnigan 
-Firenze 
-Fitch 
-Flamel 
-Flitwick 
-Fluffy 
-Fred 
-Fred Weasley 
-George 
-George Weasley 
-Ginny 
-Ginny Weasley 
-Given Harry 
-Godric 
-Golden Snitch 
-Gordon 
-Goyle 
-Gran 
-Granger 
-Gred 
-Gregory the Smarmy 
-Gringotts 
-Griphook 
-Gryffindor 
-H. Potter 
-HALLOWEEN Malfoy 
-HARRY POTTER 
-Hagrid 
-Hagrid Hagrid 
-Hagrid Harry 
-Hannah 
-Harold 
-Harry 
-Harry Hunting 
-Harry Potter 
-Harvey 
-Headless Nick 
-Hedwig 
-Hengist 
-Hermione 
-Hermione Granger 
-Higgs 
-Howard 
-Hufflepuff 
-Hut-on-the-Rock 
-Ickle Dudleykins 
-James 
-James Potter 
-Jim 
-Jim McGuffin 
-Johnson 
-Jordan 
-Justin 
-Know-Who 
-Knuts 
-Lee 
-Lee Jordan 
-Lily 
-Lisa 
-Longbottom 
-MR. DURSLEY 
-Madam Hooch 
-Madam Malkin 
-Madam Pince 
-Madam Pomfrey 
-Malcolm 
-Malfay 
-Mandy 
-Marcus Flint 
-Marge 
-McGonagall 
-McGonagall Harry 
-Merlin 
-Millicent 
-Minerva McGonagall 
-Miss Granger 
-Mom 
-Morgana 
-Mother 
-Mummy 
-NICOLAS FLAMEL Dumbledore 
-Neville 
-Neville Longbottom 
-Newt Scamander 
-Next Door 
-Nicholas 
-Nicholas de Mimsy 
-Nicholas de Mimsy-Porpington 
-Nick 
-Nicolas Flamel 
-Norbert 
-Norris 
-Oak 
-Oliver 
-Oliver Wood 
-Ollivander 
-POTTER 
-Pansy Parkinson 
-Parvati Patil 
-Patil 
-Paws 
-Peevsie 
-Percy 
-Percy Weasley 
-Perenelle 
-Petunia 
-Phyllida 
-Piers 
-Piers Polkiss 
-Potter 
-Prophet 
-Quentin Trimble 
-Quirrell 
-Ravenclaw 
-Remembrall 
-Ron 
-Ron - Ron 
-Ron Weasley 
-Ronald Weasley 
-Ronan 
-Ronnie 
-Rubeus Hagrid 
-Sally-Anne 
-Scabbers 
-Seamus 
-Seamus Finnigan 
-Severus 
-Severus Snape 
-Sickles 
-Slytherin 
-Smeltings 
-Snape 
-Susan 
-Ted 
-Terence Higgs 
-Terry 
-Thomas 
-Tibbles 
-Tom 
-Trevor 
-Tufty 
-Turpin 
-Uncle Vernon 
-Vernon 
-Vernon Dursley 
-Vindictus Viridian 
-Voldemort 
-WEASLEY 
-Warlock 
-Weasley 
-Wight 
-Wizard Baruffio 
-Wood 
-Ye 
-You-Know 
-Yvonne 
+yvonne 
+you-know 
+yew 
+yeh 
+wood 
+wizard baruffio 
+wight 
+weasleys 
+warlock 
+voldemort 
+vindictus viridian 
+vernon dursley 
+uncle vernon 
+turpin 
+tufty 
+trevor 
+tom 
+tibbles 
+thomas 
+terry 
+terence higgs 
+ted 
+susan 
+snape 
+smeltings 
+slytherins 
+sickles 
+severus snape 
+seamus finnigan 
+scabbers 
+sally-anne 
+rubeus hagrid 
+ronnie 
+ronan 
+ronald weasley 
+ron weasley 
+remembrall 
+ravenclaw 
+quirtell 
+quentin trimble 
+prophet 
+potter 
+piers polkiss 
+phyllida 
+petunia 
+perenelle 
+percy weasley 
+peevsie 
+paws 
+patil 
+parvati patil 
+pansy parkinson 
+ollivander 
+oliver wood 
+oak 
+norris 
+norbert 
+nicolas flamel dumbledore 
+nick 
+nicholas de mimsy-porpington 
+next door 
+newt scamander 
+neville longbottom 
+mummy 
+mr. dursley 
+mother 
+morgana 
+mom 
+miss granger 
+minerva mcgonagall 
+millicent 
+merlin 
+mcgonagall harry 
+marge 
+marcus flint 
+mandy 
+malfoy 
+malcolm 
+madam pomftey 
+madam pince 
+madam malkin 
+madam hooch 
+lisa 
+lily 
+lee jordan 
+knuts 
+know-who 
+justin 
+johnson 
+jim mcguffin 
+james potter 
+ickle dudleykins 
+hut-on-the-rock 
+hufflepuffs 
+howard 
+hermlone 
+hermione granger 
+hengist 
+hedwig 
+headless nick 
+harvey 
+harry potter 
+harry hunting 
+harold 
+hannah 
+halloween malfoy 
+hagrid harry 
+h. potter 
+gryffindor 
+griphook 
+gringotts 
+gregory the smarmy 
+gred 
+gran 
+goyle 
+gordon 
+golden snitch 
+godric 
+given harry 
+ginny weasley 
+george weasley 
+fred weasley 
+fluffy 
+flitwick 
+fitch 
+firenze 
+filch 
+figg 
+fetchin 
+fer dumbledore 
+fang 
+enid 
+dursleys 
+dudley dursley 
+duddy 
+du 
+draco malfoy 
+doris crockford 
+don 
+dinky duddydums 
+diggle 
+diagon alley 
+devil 
+dennis 
+dedalus diggle 
+dean thomas 
+crabbe 
+cornelius fudge 
+cliodna 
 chasin 
+chaser katie bell 
+chaser angelina johnson 
+charlie weasley 
+brown 
+brocklehurst 
+boa constrictor 
+bletchley 
+blaise 
+binns 
+bill 
+bettie bott 
+beechwood 
+baron 
+bane 
+auntie marge 
+aunt petunia 
+alicia spinnet 
+algie 
+albus dumbledore 
+alberic grunnion 
+ahern 
+agrippa 
+adrian pucey 
+abbott 

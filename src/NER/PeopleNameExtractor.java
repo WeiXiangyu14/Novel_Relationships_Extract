@@ -27,40 +27,34 @@ public class PeopleNameExtractor {
 
         AbstractSequenceClassifier classifier = CRFClassifier.getClassifierNoExceptions(serializedClassifier);
         String filePath = "/home/karry/NYU/Spring2019/nlp/assignment/project/Stone.txt", fileContents = "";
-//        try {
-//            InputStreamReader isr = new InputStreamReader(new FileInputStream(filePath),"unicode");
-//            BufferedReader br = new BufferedReader(isr);
-//            StringBuilder sb = new StringBuilder();
-//            String cur;
-//            while((cur = br.readLine()) != null) {
-//                sb.append(cur);
-//                sb.append(' ');
-//            }
-//            fileContents = sb.toString();
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            System.exit(1);
-//        }
-//
-//        List<List<CoreLabel>> out = classifier.classify(fileContents);
-//        for (List<CoreLabel> sentence : out) {
-//            for (CoreLabel word : sentence) {
-//                System.out.print(word.word() + '/' + word.get(AnswerAnnotation.class) + ' ');
-//            }
-//            System.out.println();
-//        }
+
         Map<String, List<String>> map = new HashMap<>();
         List<List<CoreLabel>> o = classifier.classifyFile(filePath);
-        HashSet<String> hs = new HashSet<>();
+        HashSet<String> hs = new HashSet<>(), male = new HashSet<>(), female = new HashSet<>();
         StringBuilder sb = new StringBuilder();
         for (List<CoreLabel> sentence : o) {
-            for (CoreLabel word : sentence) {
+            String prefix = "";
+            for (int i = 0; i < sentence.size(); i++) {
+                CoreLabel word = sentence.get(i);
                 if (word.get(AnswerAnnotation.class).compareTo("PERSON") == 0) {
+                    if (i > 0 && sentence.get(i - 1).get(AnswerAnnotation.class).compareTo("PERSON") != 0) {
+                        String mr = sentence.get(i - 1).word().toLowerCase();
+                        if (mr.compareTo("mr") == 0 || mr.compareTo("mrs") == 0 ||
+                                mr.compareTo("mr.") == 0 || mr.compareTo("mrs.") == 0) {
+                            prefix = mr;
+                        }
+                    }
                     if (word.word().compareTo("-") == 0) continue;
                     sb.append(word.word().toLowerCase());
                     sb.append(' ');
                 }
                 else if (sb.length() > 0) {
+                    if (prefix.compareTo("mr") == 0 || prefix.compareTo("mr.") == 0) {
+                        male.add(sb.toString());
+                    }
+                    if (prefix.compareTo("mrs") == 0 || prefix.compareTo("mrs.") == 0) {
+                        female.add(sb.toString());
+                    }
                     hs.add(sb.toString());
                     sb.setLength(0);
                 }
@@ -71,6 +65,7 @@ public class PeopleNameExtractor {
         DistanceUtil dis = new DistanceUtil();
         // for Jaro
         for (int i = 0; i < ls.size(); i++) {
+            boolean inmap = false;
             for (int j = i + 1; j < ls.size(); j++) {
                 double sim = dis.jaro(ls.get(i), ls.get(j));
                 if (sim > 0.9 || containword(ls.get(i), ls.get(j))) { // deal with "A B" vs "A"
@@ -80,7 +75,12 @@ public class PeopleNameExtractor {
                     map.put(key, list);
                     ls.remove(j);
                     j--;
+                    inmap = true;
                 }
+            }
+            if (!inmap) {
+                List<String> l = new ArrayList<>();
+                map.put(ls.get(i), l);
             }
         }
 //        // for soundex
@@ -111,11 +111,23 @@ public class PeopleNameExtractor {
             String dictname = "/dict.txt";
             BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + dictname));
             for (Map.Entry<String, List<String>> entry : map.entrySet()) {
-                String s = entry.getKey().trim();
+                String s = entry.getKey().trim(), key = s;
                 for (String val : entry.getValue()) {
-                    s += (", " + val.trim());
+                    String t;
+                    if (female.contains(val)) {
+                        t = "Mrs. " + val.trim();
+                        key = t;
+                    }
+                    else if (male.contains(val)) {
+                        t = "Mr. " + val.trim();
+                        key = t;
+                    }
+                    else {
+                        t = val.trim();
+                    }
+                    s += (", " + t);
                 }
-                String key = entry.getKey().trim().replaceAll(" ", "_").toUpperCase();
+                key = key.replaceAll(" ", "_").toUpperCase();
                 writer.write(key + ": " + s + "\n");
             }
             writer.close();
