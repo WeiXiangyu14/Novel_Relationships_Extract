@@ -199,7 +199,8 @@ class RelationExtract:
                     senti_mat[i, j] = senti_dict[name1, name2]
         return senti_mat
 
-    def create_senti_image(self, senti_mat):
+    @staticmethod
+    def create_senti_image(senti_mat):
         im = Image.fromarray(senti_mat)
         im.save("interact.jpeg")
         return im
