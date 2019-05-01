@@ -30,7 +30,7 @@ class RelationExtract:
         self.interact = {}  # Count how many times two roles interact.
         self.interact_pos = {}  # Count how many times two roles interact positively.
         self.interact_neg = {}  # Count how many times two roles interact negatively.
-        self.nlp = stanfordnlp.Pipeline()
+        self.nlp = stanfordnlp.Pipeline(use_gpu=False)
         self.sentim_analyzer = SIA()
 
         self.name2int = {}
@@ -205,9 +205,12 @@ class RelationExtract:
         im.save("interact.jpeg")
         return im
 
-    def cluster_analyze(self):
-        # TODO: try spectral cluster
-        pass
+    @staticmethod
+    def cluster_analyze(mat):
+        mat = np.mat(mat)
+        n_clusters = 3
+        clusters = SpectralClustering(n_clusters).fit_predict(mat)
+        return clusters
 
     def main(self):
         self.get_name_list()
@@ -217,8 +220,8 @@ class RelationExtract:
         self.get_interest_stcs()
         self.print_interact()
         interact_mat = self.get_sentiment_mat(self.interact)
-        plt.matshow(interact_mat)
-        plt.show()
+        # plt.matshow(interact_mat)
+        # plt.show()
 
 
 if __name__ == '__main__':
