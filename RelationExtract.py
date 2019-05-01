@@ -205,11 +205,12 @@ class RelationExtract:
         im.save("interact.jpeg")
         return im
 
-    @staticmethod
-    def cluster_analyze(mat):
+    def cluster_analyze(self, mat):
         mat = np.mat(mat)
         n_clusters = 3
         clusters = SpectralClustering(n_clusters).fit_predict(mat)
+        for i, cls in enumerate(clusters):
+            print("Name:", self.int2name[i], "; cluster: ", cls)
         return clusters
 
     def main(self):
@@ -219,7 +220,8 @@ class RelationExtract:
         self.get_chapters()
         self.get_interest_stcs()
         self.print_interact()
-        interact_mat = self.get_sentiment_mat(self.interact)
+        interact_mat = self.get_sentiment_mat(self.interact_pos)
+        self.cluster_analyze(interact_mat)
         # plt.matshow(interact_mat)
         # plt.show()
 
