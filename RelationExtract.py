@@ -66,8 +66,6 @@ class RelationExtract:
         f = open("./sentences.txt", "w")
         for stcs in sentences:
             stcs = stcs.lower()
-            #TODO: clear the spaces after "mr.", "ms." or "mrs."
-
             for key in self.name_replace:
                 if stcs.find(key) > -1:
                     stcs = stcs.replace(key, self.name_replace[key])
