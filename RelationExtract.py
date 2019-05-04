@@ -23,6 +23,7 @@ def download_corpus():
 class RelationExtract:
     def __init__(self, path="./Corpus/Harry Potter and the Sorcerer's Stone.txt"):
         self.path = path
+        self.clean_path = "./clean_text.txt"
         self.name_list = None
         self.sentences = None
         self.interest = []
@@ -38,6 +39,16 @@ class RelationExtract:
         self.name_look_up = {}
         self.name_replace = {}
         self.pos_mat = None
+
+    def clean_text(self):
+        f = open(self.path, "r")
+        text = f.read()
+        f.close()
+        text = text.split(" ")
+        text = " ".join(text)
+        f = open(self.clean_path, 'w')
+        f.write(text)
+        f.close()
 
     def extract_sentence(self, path):
         f = open(path, 'r')
@@ -59,7 +70,7 @@ class RelationExtract:
 
             for key in self.name_replace:
                 if stcs.find(key) > -1:
-                    stcs = stcs.replace(key, " " +self.name_replace[key])
+                    stcs = stcs.replace(key, self.name_replace[key])
             f.write(stcs + "\n")
         f.close()
         return sentences
@@ -80,8 +91,8 @@ class RelationExtract:
             equal = l.split(",")
             for index, alias in enumerate(equal):
                 alias = alias.strip().lower()
-                if alias.startswith("mr.") or alias.startswith("ms.") or alias.startswith("mrs."):
-                    alias = alias.replace(" ", "")
+                # if alias.startswith("mr.") or alias.startswith("ms.") or alias.startswith("mrs."):
+                #     alias = alias.replace(" ", "")
                 equal[index] = alias
                 replace[alias] = name
 
@@ -246,8 +257,9 @@ class RelationExtract:
         return clusters
 
     def main(self):
+        self.clean_text()
         self.get_name_list()
-        self.sentences = self.extract_sentence(self.path)
+        self.sentences = self.extract_sentence(self.clean_path)
         # # self.fine_tuning()
         # self.get_chapters()
         # self.get_interest_stcs()
