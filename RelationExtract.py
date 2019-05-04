@@ -45,6 +45,8 @@ class RelationExtract:
         text = text.replace("\n\n", "\t")
         text = text.replace("\n", " ")
         text = text.replace("\t", "\n")
+        f.close()
+        sentences = nltk.tokenize.sent_tokenize(text)
         text = text.replace("\"\"", "\". \"")
         f.close()
         sentences = nltk.tokenize.sent_tokenize(text)
@@ -53,6 +55,8 @@ class RelationExtract:
         f = open("./sentences.txt", "w")
         for stcs in sentences:
             stcs = stcs.lower()
+            #TODO: clear the spaces after "mr.", "ms." or "mrs."
+
             for key in self.name_replace:
                 if stcs.find(key) > -1:
                     stcs = stcs.replace(key, " " +self.name_replace[key])
@@ -64,21 +68,27 @@ class RelationExtract:
         f = open("./Corpus/namelist.txt")
         lines = f.readlines()
         f.close()
-        names = []
+        name_list = []
         lookup = {}
         replace = {}
         for l in lines:
             l = l.replace("\n", "")
             index = l.find(":")
             name = l[:index]
-            names.append(name)
+            name_list.append(name)
             l = l[index+2:]
             equal = l.split(",")
-            lookup[name] = equal
-            for alias in equal:
+            for index, alias in enumerate(equal):
+                alias = alias.strip().lower()
+                if alias.startswith("mr.") or alias.startswith("ms.") or alias.startswith("mrs."):
+                    alias = alias.replace(" ", "")
+                equal[index] = alias
                 replace[alias] = name
 
-        self.name_list = names
+            lookup[name] = equal
+
+
+        self.name_list = name_list
         self.name_look_up = lookup
         self.name_replace = replace
         for index, name in enumerate(self.name_list):
