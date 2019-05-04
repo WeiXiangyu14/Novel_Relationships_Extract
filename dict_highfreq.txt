@@ -1,184 +1,53 @@
-GRIPHOOK: griphook
-PROPHET: prophet
-NORRIS: norris
-MALFOY: malfoy, malfay
-RAVENCLAW: ravenclaw
-SALLY-ANNE: sally-anne
-DUMBLEDORE: dumbledore
-DON: don
-ADRIAN_PUCEY: adrian pucey
-KNUTS: knuts
-HAGRID_HARRY: hagrid harry
-CLIODNA: cliodna
-MANDY: mandy
-GREGORY_THE_SMARMY: gregory the smarmy
-DUDDY: duddy
-ICKLE_DUDLEYKINS: ickle dudleykins
 DRACO_MALFOY: draco malfoy
-DIAGON_ALLEY: diagon alley
-SICKLES: sickles
-RON_WEASLEY: ron weasley
-HAGRID_HAGRID: hagrid hagrid
-DENNIS: dennis
-BROWN: brown
-NICK: nick
-HARRY_POTTER: harry potter
-LEE_JORDAN: lee jordan, lee, jordan
-FANG: fang
-HERMIONE_GRANGER: hermione granger, hermione
-GRAN: gran
-VOLDEMORT: voldemort
-BLAISE: blaise
-FIRENZE: firenze
-BOA_CONSTRICTOR: boa constrictor
-GIVEN_HARRY: given harry
-TREVOR: trevor
-AUNTIE_MARGE: auntie marge
-NICHOLAS_DE_MIMSY-PORPINGTON: nicholas de mimsy-porpington, nicholas de mimsy
-VINDICTUS_VIRIDIAN: vindictus viridian
-TOM: tom
-TERENCE_HIGGS: terence higgs, higgs
-BANE: bane
-OLLIVANDER: ollivander
+QUIRRELL: quirrell
 MADAM_MALKIN: madam malkin
-BEECHWOOD: beechwood
-SMELTINGS: smeltings
-JIM_MCGUFFIN: jim mcguffin, jim
-WIZARD_BARUFFIO: wizard baruffio
-SUSAN: susan
-RUBEUS_HAGRID: rubeus hagrid
-NICHOLAS: nicholas
-DEVIL: devil
-CHASER_ANGELINA_JOHNSON: chaser angelina johnson, angelina johnson
-HARVEY: harvey
-GOLDEN_SNITCH: golden snitch
-AGRIPPA: agrippa
-CORNELIUS_FUDGE: cornelius fudge
-MOM: mom
-GORDON: gordon
-GRANGER: granger
-POTTER: potter
-PERENELLE: perenelle
-HUT-ON-THE-ROCK: hut-on-the-rock
-TERRY: terry
-OLIVER_WOOD: oliver wood, oliver
-MERLIN: merlin
-DURSLEYS: dursleys, dursley
-HUFFLEPUFFS: hufflepuffs, hufflepuffis, hufflepuff
-FIGG: figg
-OAK: oak
-RON: ron
-TED: ted
-BROCKLEHURST: brocklehurst
-UNCLE_VERNON: uncle vernon
-CHASER_KATIE_BELL: chaser katie bell, chaser bell
-MARGE: marge
-PAWS: paws
-ALICIA_SPINNET: alicia spinnet
-HEADLESS_NICK: headless nick
-GEORGE_WEASLEY: george weasley, george
-MADAM_HOOCH: madam hooch
-BILL: bill
-YVONNE: yvonne
-PATIL: patil
-TIBBLES: tibbles
-NEWT_SCAMANDER: newt scamander
-MALCOLM: malcolm
-DIGGLE: diggle
-DEDALUS_DIGGLE: dedalus diggle
-GRED: gred
-ALBERIC_GRUNNION: alberic grunnion
-NORBERT: norbert
-HAROLD: harold
-NEXT_DOOR: next door
-CRABBE: crabbe
-VERNON_DURSLEY: vernon dursley
-PARVATI_PATIL: parvati patil
-GOYLE: goyle
-FETCHIN: fetchin
-HARRY: harry
-TUFTY: tufty
-THOMAS: thomas
-ALBUS_DUMBLEDORE: albus dumbledore, albus dumbled
-MILLICENT: millicent
-HANNAH: hannah
-GINNY_WEASLEY: ginny weasley, ginny
-JAMES_POTTER: james potter, james
-RONNIE: ronnie
-JOHNSON: johnson
-WIGHT: wight
-RON_RON: ron ron
-MISS_GRANGER: miss granger
-H._POTTER: h. potter
-PIERS_POLKISS: piers polkiss, piers
-BLETCHLEY: bletchley
-SLYTHERINS: slytherins, slytherin
-GRINGOTTS: gringotts
-BINNS: binns
-ABBOTT: abbott
-SEVERUS_SNAPE: severus snape, severus
-FITCH: fitch
-JUSTIN: justin
-AUNT_PETUNIA: aunt petunia
-MUMMY: mummy
-YEW: yew, ye
-HENGIST: hengist
-CHARLIE_WEASLEY: charlie weasley, charlie
-HAGRID: hagrid
-DU: du
-REMEMBRALL: remembrall
-FER_DUMBLEDORE: fer dumbledore
-PERCY_WEASLEY: percy weasley, percy
+DUDLEY: dudley
+PERCY: percy
+HARRY_POTTER: harry potter, harry
 FLITWICK: flitwick
-LILY: lily
-MORGANA: morgana
-MOTHER: mother
-FILCH: filch
-DORIS_CROCKFORD: doris crockford
-RONALD_WEASLEY: ronald weasley
-ALGIE: algie
+NEVILLE: neville
 FRED_WEASLEY: fred weasley, fred
-QUIRTELL: quirtell, quirrell
-MADAM_PINCE: madam pince
-TURPIN: turpin
-MARCUS_FLINT: marcus flint
-MINERVA_MCGONAGALL: minerva mcgonagall
-MCGONAGALL: mcgonagall
-PHYLLIDA: phyllida
-MR._DURSLEY: mr. dursley
-HOWARD: howard
-FLUFFY: fluffy
-YOU-KNOW: you-know
+SEAMUS_FINNIGAN: seamus finnigan, seamus
+GOYLE: goyle
+BANE: bane
 WOOD: wood
-NEVILLE_LONGBOTTOM: neville longbottom, neville, longbottom
-GODRIC: godric
-SCABBERS: scabbers
-KNOW-WHO: know-who
-LISA: lisa
-BETTIE_BOTT: bettie bott, bertie bott
-SNAPE: snape
-ENID: enid
-HARRY_HUNTING: harry hunting
-GRYFFINDOR: gryffindor
-VERNON: vernon
-HEDWIG: hedwig
-CHASIN: chasin
-BELL: bell
-BARON: baron
-AHERN: ahern
-MADAM_POMFTEY: madam pomftey, madam pomfrey
-NICOLAS_FLAMEL: nicolas flamel, nicolas, flamel
-WEASLEYS: weasleys, weasley
-ALBUS: albus
-DINKY_DUDDYDUMS: dinky duddydums
-PEEVSIE: peevsie
-DEAN_THOMAS: dean thomas, dean
-SEAMUS_FINNIGAN: seamus finnigan, seamus, finnigan
-QUENTIN_TRIMBLE: quentin trimble
-PANSY_PARKINSON: pansy parkinson
-DUDLEY_DURSLEY: dudley dursley, dudley
-MCGONAGALL_HARRY: mcgonagall harry
+MARCUS_FLINT: marcus flint
+FANG: fang
+OLLIVANDER: ollivander
+BILL: bill
+NORRIS: norris
+GEORGE_WEASLEY: george weasley, george
+SLYTHERINS: slytherins, slytherin
+LONGBOTTOM: longbottom
+HAGRID: hagrid
+DEAN: dean
 RONAN: ronan
-WARLOCK: warlock
+WEASLEY: weasley
+FIGG: figg
+VOLDEMORT: voldemort
+RON: ron
+GRIPHOOK: griphook
+SNAPE: snape
+HUFFLEPUFF: hufflepuff
+MADAM_HOOCH: madam hooch
+DURSLEYS: dursleys, dursley
 YEH: yeh
-PETUNIA: petunia
+POTTER: potter
+NORBERT: norbert
+UNCLE_VERNON: uncle vernon
+DUMBLEDORE: dumbledore
+KNUTS: knuts
+VERNON: vernon
+GRINGOTTS: gringotts
+MCGONAGALL: mcgonagall
+ALBUS_DUMBLEDORE: albus dumbledore
+RAVENCLAW: ravenclaw
+NICOLAS_FLAMEL: nicolas flamel
+CRABBE: crabbe
+MALFOY: malfoy
+LEE_JORDAN: lee jordan
+MADAM_POMFREY: madam pomfrey
+LILY: lily
+FIRENZE: firenze
+HERMIONE_GRANGER: hermione granger, hermione, granger
+CHARLIE: charlie

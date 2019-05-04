@@ -23,7 +23,7 @@ NICK: nick
 HARRY_POTTER: harry potter
 LEE_JORDAN: lee jordan, lee, jordan
 FANG: fang
-HERMIONE_GRANGER: hermione granger
+HERMIONE_GRANGER: hermione granger, hermione
 GRAN: gran
 VOLDEMORT: voldemort
 BLAISE: blaise
@@ -128,7 +128,6 @@ MOTHER: mother
 FILCH: filch
 DORIS_CROCKFORD: doris crockford
 RONALD_WEASLEY: ronald weasley
-HERMLONE: hermlone, hermione
 ALGIE: algie
 FRED_WEASLEY: fred weasley, fred
 QUIRTELL: quirtell, quirrell

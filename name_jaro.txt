@@ -1,174 +1,58 @@
-yvonne 
-you-know 
-yew 
-yeh 
-wood 
-wizard baruffio 
-wight 
-weasleys 
-warlock 
-voldemort 
-vindictus viridian 
-vernon dursley 
-uncle vernon 
-turpin 
-tufty 
-trevor 
-tom 
-tibbles 
-thomas 
-terry 
-terence higgs 
-ted 
-susan 
-snape 
-smeltings 
-slytherins 
-sickles 
-severus snape 
-seamus finnigan 
-scabbers 
-sally-anne 
-rubeus hagrid 
-ronnie 
-ronan 
-ronald weasley 
-ron weasley 
-remembrall 
-ravenclaw 
-quirtell 
-quentin trimble 
-prophet 
-potter 
-piers polkiss 
-phyllida 
-petunia 
-perenelle 
-percy weasley 
-peevsie 
-paws 
-patil 
-parvati patil 
-pansy parkinson 
-ollivander 
-oliver wood 
-oak 
-norris 
-norbert 
-nicolas flamel dumbledore 
-nick 
-nicholas de mimsy-porpington 
-next door 
-newt scamander 
-neville longbottom 
-mummy 
-mr. dursley 
-mother 
-morgana 
-mom 
-miss granger 
-minerva mcgonagall 
-millicent 
-merlin 
-mcgonagall harry 
-marge 
-marcus flint 
-mandy 
-malfoy 
-malcolm 
-madam pomftey 
-madam pince 
-madam malkin 
-madam hooch 
-lisa 
-lily 
-lee jordan 
-knuts 
-know-who 
-justin 
-johnson 
-jim mcguffin 
-james potter 
-ickle dudleykins 
-hut-on-the-rock 
-hufflepuffs 
-howard 
-hermlone 
-hermione granger 
-hengist 
-hedwig 
-headless nick 
-harvey 
-harry potter 
-harry hunting 
-harold 
-hannah 
-halloween malfoy 
-hagrid harry 
-h. potter 
-gryffindor 
-griphook 
-gringotts 
-gregory the smarmy 
-gred 
-gran 
-goyle 
-gordon 
-golden snitch 
-godric 
-given harry 
-ginny weasley 
-george weasley 
-fred weasley 
-fluffy 
-flitwick 
-fitch 
-firenze 
-filch 
-figg 
-fetchin 
-fer dumbledore 
-fang 
-enid 
-dursleys 
-dudley dursley 
-duddy 
-du 
-draco malfoy 
-doris crockford 
-don 
-dinky duddydums 
-diggle 
-diagon alley 
-devil 
-dennis 
-dedalus diggle 
-dean thomas 
-crabbe 
-cornelius fudge 
-cliodna 
-chasin 
-chaser katie bell 
-chaser angelina johnson 
-charlie weasley 
-brown 
-brocklehurst 
-boa constrictor 
-bletchley 
-blaise 
-binns 
-bill 
-bettie bott 
-beechwood 
-baron 
-bane 
-auntie marge 
-aunt petunia 
-alicia spinnet 
-algie 
-albus dumbledore 
-alberic grunnion 
-ahern 
-agrippa 
-adrian pucey 
-abbott 
+yeh
+wood
+weasley
+voldemort
+vernon
+uncle vernon
+snape
+slytherins
+seamus finnigan
+ronan
+ron
+ravenclaw
+quirrell
+potter
+percy
+ollivander
+oliver wood
+norris
+norbert
+nicolas flamel
+neville
+mcgonagall
+marge
+marcus flint
+malfoy
+madam pomfrey
+madam malkin
+madam hooch
+longbottom
+lily
+lee jordan
+knuts
+hufflepuff
+hermione granger
+hedwig
+harry potter
+hagrid
+griphook
+gringotts
+goyle
+ginny
+george weasley
+fred weasley
+flitwick
+firenze
+figg
+fang
+dursleys
+dumbledore
+dudley
+draco malfoy
+dedalus diggle
+dean
+crabbe
+charlie
+bill
+bane
+albus dumbledore
