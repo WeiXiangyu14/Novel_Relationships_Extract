@@ -209,8 +209,10 @@ class RelationExtract:
         mat = np.mat(mat)
         n_clusters = 3
         clusters = SpectralClustering(n_clusters).fit_predict(mat)
+        f = open('cluster.txt', 'w')
         for i, cls in enumerate(clusters):
-            print("Name:", self.int2name[i], "; cluster: ", cls)
+            f.write("Name:" + str(self.int2name[i]) + "; cluster: " + str(cls) + "\n")
+        f.close()
         return clusters
 
     def main(self):
