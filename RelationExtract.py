@@ -96,10 +96,10 @@ class RelationExtract:
 
             lookup[name] = equal
 
-
         self.name_list = name_list
         self.name_look_up = lookup
         self.name_replace = replace
+        # TODO: sort the name_replace by key(string), longer 2 shorter
         for index, name in enumerate(self.name_list):
             self.name2int[name] = index
             self.int2name[index] = name
