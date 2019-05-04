@@ -64,9 +64,12 @@ class RelationExtract:
         print("Totally ", len(sentences), "sentences.")
 
         f = open("./sentences.txt", "w")
+        sorted_keys = list(self.name_replace.keys())
+        sorted_keys.sort(key = lambda i:len(i), reverse=True)
+        print(sorted_keys)
         for stcs in sentences:
             stcs = stcs.lower()
-            for key in self.name_replace:
+            for key in sorted_keys:
                 if stcs.find(key) > -1:
                     stcs = stcs.replace(key, self.name_replace[key])
             f.write(stcs + "\n")
