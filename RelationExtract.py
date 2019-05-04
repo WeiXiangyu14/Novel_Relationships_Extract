@@ -56,7 +56,6 @@ class RelationExtract:
             for key in self.name_replace:
                 if stcs.find(key) > -1:
                     stcs = stcs.replace(key, " " +self.name_replace[key])
-                    print(stcs)
             f.write(stcs + "\n")
         f.close()
         return sentences
