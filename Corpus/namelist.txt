@@ -114,7 +114,7 @@ FITCH: fitch
 JUSTIN: justin
 AUNT_PETUNIA: aunt petunia
 MUMMY: mummy
-YEW: yew, ye
+YEW: yew
 HENGIST: hengist
 MRS._CHARLIE: charlie weasley, Mrs. charlie
 REMEMBRALL: remembrall
