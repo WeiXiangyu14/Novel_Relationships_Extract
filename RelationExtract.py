@@ -36,6 +36,7 @@ class RelationExtract:
         self.name2int = {}
         self.int2name = {}
         self.name_look_up = {}
+        self.name_replace = {}
         self.pos_mat = None
 
     @staticmethod
@@ -61,6 +62,7 @@ class RelationExtract:
         f.close()
         names = []
         lookup = {}
+        replace = {}
         for l in lines:
             l = l.replace("\n", "")
             index = l.find(":")
@@ -69,9 +71,12 @@ class RelationExtract:
             l = l[index+2:]
             equal = l.split(",")
             lookup[name] = equal
+            for alias in equal:
+                replace[alias] = name
 
         self.name_list = names
         self.name_look_up = lookup
+        self.name_replace = replace
         for index, name in enumerate(self.name_list):
             self.name2int[name] = index
             self.int2name[index] = name
