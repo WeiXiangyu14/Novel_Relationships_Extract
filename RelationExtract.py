@@ -2,7 +2,7 @@ import nltk
 import re
 from nltk.parse import CoreNLPParser
 from nltk.corpus import sentiwordnet as swn
-import stanfordnlp
+# import stanfordnlp
 import spacy
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 import numpy as np
@@ -30,12 +30,12 @@ class RelationExtract:
         self.interact = {}  # Count how many times two roles interact.
         self.interact_pos = {}  # Count how many times two roles interact positively.
         self.interact_neg = {}  # Count how many times two roles interact negatively.
-        self.nlp = stanfordnlp.Pipeline(use_gpu=False)
+        # self.nlp = stanfordnlp.Pipeline(use_gpu=False)
         self.sentim_analyzer = SIA()
 
         self.name2int = {}
         self.int2name = {}
-
+        self.name_look_up = {}
         self.pos_mat = None
 
     @staticmethod
@@ -57,14 +57,25 @@ class RelationExtract:
 
     def get_name_list(self):
         f = open("./Corpus/namelist.txt")
-        names = f.read().split('\n')
+        lines = f.readlines()
         f.close()
-        self.name_list = names
+        names = []
+        lookup = {}
+        for l in lines:
+            l = l.replace("\n", "")
+            index = l.find(":")
+            name = l[:index]
+            names.append(name)
+            l = l[index+2:]
+            equal = l.split(",")
+            lookup[name] = equal
 
+        self.name_list = names
+        self.name_look_up = lookup
         for index, name in enumerate(self.name_list):
             self.name2int[name] = index
             self.int2name[index] = name
-        return [name for name in names if len(name) > 0]
+
 
     def get_interest_stcs(self):
         f = open("role_gt_2.txt", "w")
@@ -82,21 +93,21 @@ class RelationExtract:
                 continue
 
             role_gt_2.append(stcs)
-            doc = self.nlp(stcs)
+            # doc = self.nlp(stcs)
 
             pos, neg = self.sentiment_analysis(stcs)
 
             nsubj = []
             obj = []
             root = None
-            for dep_edge in doc.sentences[0].dependencies:
+            # for dep_edge in doc.sentences[0].dependencies:
                 # print(dep_edge[2].text, dep_edge[0].index, dep_edge[1])
-                if dep_edge[1] == "root":
-                    root = dep_edge[2].text
-                if dep_edge[1] == "nsubj":
-                    nsubj.append(dep_edge[2].text)
-                if dep_edge[1] == "obj":
-                    obj.append(dep_edge[2].text)
+                # if dep_edge[1] == "root":
+                #     root = dep_edge[2].text
+                # if dep_edge[1] == "nsubj":
+                #     nsubj.append(dep_edge[2].text)
+                # if dep_edge[1] == "obj":
+                #     obj.append(dep_edge[2].text)
 
             f.write(stcs + "\n")
             f.write(str(roles) + "\n")
@@ -217,13 +228,13 @@ class RelationExtract:
 
     def main(self):
         self.get_name_list()
-        self.sentences = self.extract_sentence(self.path)
-        # self.fine_tuning()
-        self.get_chapters()
-        self.get_interest_stcs()
-        self.print_interact()
-        interact_mat = self.get_sentiment_mat(self.interact_pos)
-        self.cluster_analyze(interact_mat)
+        # self.sentences = self.extract_sentence(self.path)
+        # # self.fine_tuning()
+        # self.get_chapters()
+        # self.get_interest_stcs()
+        # self.print_interact()
+        # interact_mat = self.get_sentiment_mat(self.interact)
+        # self.cluster_analyze(interact_mat)
         # plt.matshow(interact_mat)
         # plt.show()
 
