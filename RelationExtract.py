@@ -39,8 +39,7 @@ class RelationExtract:
         self.name_replace = {}
         self.pos_mat = None
 
-    @staticmethod
-    def extract_sentence(path):
+    def extract_sentence(self, path):
         f = open(path, 'r')
         text = f.read()
         text = text.replace("\n\n", "\t")
@@ -50,8 +49,14 @@ class RelationExtract:
         f.close()
         sentences = nltk.tokenize.sent_tokenize(text)
         print("Totally ", len(sentences), "sentences.")
+
         f = open("./sentences.txt", "w")
         for stcs in sentences:
+            stcs = stcs.lower()
+            for key in self.name_replace:
+                if stcs.find(key) > -1:
+                    stcs = stcs.replace(key, " " +self.name_replace[key])
+                    print(stcs)
             f.write(stcs + "\n")
         f.close()
         return sentences
@@ -233,7 +238,7 @@ class RelationExtract:
 
     def main(self):
         self.get_name_list()
-        # self.sentences = self.extract_sentence(self.path)
+        self.sentences = self.extract_sentence(self.path)
         # # self.fine_tuning()
         # self.get_chapters()
         # self.get_interest_stcs()
