@@ -2,7 +2,7 @@ import nltk
 import re
 from nltk.parse import CoreNLPParser
 from nltk.corpus import sentiwordnet as swn
-# import stanfordnlp
+import stanfordnlp
 import spacy
 from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
 import numpy as np
@@ -27,20 +27,24 @@ class RelationExtract:
         self.replace_text_path = "./replaced_text.txt"
         self.name_list = None
         self.sentences = None
-        self.interest = []
-        self.chapters = []
         self.interact = {}  # Count how many times two roles interact.
         self.interact_pos = {}  # Count how many times two roles interact positively.
         self.interact_neg = {}  # Count how many times two roles interact negatively.
         self.role_freq = {}
-        # self.nlp = stanfordnlp.Pipeline(use_gpu=False)
+        self.interact_mat = None
+        self.nlp = stanfordnlp.Pipeline(use_gpu=False)
         self.sentim_analyzer = SIA()
 
         self.name2int = {}
         self.int2name = {}
         self.name_look_up = {}
         self.name_replace = {}
-        self.pos_mat = None
+
+        self.name_label = None
+
+        self.connected_graph = None
+        self.ori2sub = {} # node lookup table from origin to sub mat
+        self.sub2ori = {} # node lookup table from sub to origin mat
 
     def clean_text(self):
         f = open(self.path, "r")
@@ -116,8 +120,15 @@ class RelationExtract:
         f = open("role_gt_2.txt", "w")
         role_gt_1 = []
         role_gt_2 = []
-        for stcs in self.sentences:
+
+        last = 0
+        length = len(self.sentences)
+        for index, stcs in enumerate(self.sentences):
             num_roles = 0
+            if index / length - last > 0.05:
+                last = index / length
+                print("Processing: ", int(last*100), "%;")
+
             roles = []  # Stores the roles show up in this sentence
             stcs_list = stcs.split()
             for name in self.name_list:
@@ -137,7 +148,8 @@ class RelationExtract:
             role_gt_2.append(stcs)
             # doc = self.nlp(stcs)
 
-            pos, neg = self.sentiment_analysis(stcs)
+            # pos, neg = self.sentiment_analysis(stcs)
+            pos, neg = self.sentiment_analysis_keyword(stcs)
 
             nsubj = []
             obj = []
@@ -189,8 +201,19 @@ class RelationExtract:
         neg = analyze["neg"]
         return pos, neg
 
-    def print_dict(self, dict):
-        f = open("interact_dict.txt", 'w')
+    def sentiment_analysis_keyword(self, stcs):
+        doc = self.nlp(stcs)
+        for dep_edge in doc.sentences[0].dependencies:
+            if dep_edge[1] == "root":
+                keyword = dep_edge[2].text
+
+        analyze = self.sentim_analyzer.polarity_scores(keyword)
+        pos = analyze["pos"]
+        neg = analyze["neg"]
+        return pos, neg
+
+    def print_dict(self, dict, path="interact_dict.txt"):
+        f = open(path, 'w')
         for key in dict:
             f.write("Key = %s, value = %s\n"%(str(key), str(dict[key])))
         f.close()
@@ -243,14 +266,14 @@ class RelationExtract:
                     f.write(name + "\n")
         f.close()
 
-    def dict_to_mat(self, senti_dict):
+    def dict_to_mat(self, senti_dict, path="interact.txt"):
         senti_mat = np.zeros((len(self.name_list), len(self.name_list)))
         for keys in senti_dict:
             i, j = self.name2int[keys[0]], self.name2int[keys[1]]
             senti_mat[i, j] = senti_dict[keys]
             senti_mat[j, i] = senti_dict[keys]
 
-        np.savetxt("interact.txt", senti_mat)
+        np.savetxt(path, senti_mat)
         return senti_mat
 
     @staticmethod
@@ -259,10 +282,10 @@ class RelationExtract:
         im.save("interact.jpeg")
         return im
 
-    def cluster_analyze(self, mat):
-            # TODO: sparse subspace clustering
+    def cluster_analyze(self, mat, n):
+        # TODO: sparse subspace clustering
         mat = np.mat(mat)
-        n_clusters = 10
+        n_clusters = n
         clusters = SpectralClustering(n_clusters).fit_predict(mat)
         f = open('cluster.txt', 'w')
         for i, cls in enumerate(clusters):
@@ -270,8 +293,52 @@ class RelationExtract:
         f.close()
         return clusters
 
-    def analyze_mat(self, mat):
-        pass
+    def devide_connected_mat(self, mat):
+        #TODO: Devide the mat into connected sub_mat
+        self.name_label = np.zeros(len(self.name_list))
+        subgraph = []
+        for i in range(len(self.name_label)):
+            if self.name_label[i] == 0:
+                ret = list()
+                self.DFS(i, ret, mat)
+                subgraph.append(ret)
+        return subgraph
+
+    def generate_graph_mat(self, node_list, origin_mat):
+        mat = np.zeros((len(node_list), len(node_list)))
+        for i, oi in enumerate(node_list):
+            for j, oj in enumerate(node_list):
+                mat[i, j] = origin_mat[oi, oj]
+        return mat
+
+    def print_subgraph_node(self, subgraph):
+        count = 0
+        for i, cls in enumerate(subgraph):
+            print("class ", i, end=": ")
+            count += len(cls)
+            for j in cls:
+                print(self.int2name[j], end=" ")
+            print()
+        print("Total: ", count, "roles; ", len(subgraph), "connected subgraphs.")
+
+    def DFS(self, node, ret, mat):
+        if self.name_label[node] == 0:
+            self.name_label[node] = 1
+            ret.append(node)
+            for i in range(len(self.name_label)):
+                if i != node and self.name_label[i] == 0 and mat[node, i] > 0:
+                    self.DFS(i, ret, mat)
+        return ret
+
+    def get_weighted_mat(self, dict, path):
+        mat = self.dict_to_mat(dict, path=path)
+        n = len(self.name_list)
+        for i in range(n):
+            for j in range(n):
+                if self.interact_mat[i, j] > 0:
+                    mat[i, j] /= self.interact_mat[i, j]
+        return mat
+
 
     def main(self):
         self.clean_text()
@@ -281,14 +348,35 @@ class RelationExtract:
         self.get_interest_stcs()
         self.print_dict(self.interact)
         print(len(self.interact))
-        interact_mat = self.dict_to_mat(self.interact)
-        self.analyze_mat(interact_mat)
+        self.interact_mat = self.dict_to_mat(self.interact)
+        self.devide_connected_mat(self.interact_mat)
         # self.cluster_analyze(interact_mat)
         self.role_freq = sorted(self.role_freq.items(), key=lambda item: item[1], reverse=True)
         print(self.role_freq)
+        subgraph = self.devide_connected_mat(self.interact_mat)
+        self.print_subgraph_node(subgraph)
 
-        plt.matshow(interact_mat)
+        self.connected_graph = self.generate_graph_mat(subgraph[0], self.interact_mat)
+        submat = self.connected_graph.copy()
+        submat[submat > 0] = 1
+        submat[submat <= 0] = 0
+        # plt.matshow(submat)
+        # plt.show()
+
+        self.interact_pos_mat = self.get_weighted_mat(self.interact_pos, "interact_pos.txt")
+        self.interact_neg_mat = self.get_weighted_mat(self.interact_neg, "interact_neg.txt")
+
+
+        self.senti_relationship = self.interact_pos_mat - self.interact_neg_mat
+
+        np.savetxt("senti_pos_neg.txt", self.senti_relationship)
+
+        plt.matshow(self.senti_relationship)
+        # plt.matshow(self.interact_neg_mat)
+
         plt.show()
+        self.cluster_analyze(self.senti_relationship , n=2)
+
 
 
 if __name__ == '__main__':
