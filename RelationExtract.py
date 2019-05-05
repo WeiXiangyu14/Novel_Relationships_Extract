@@ -73,7 +73,7 @@ class RelationExtract:
             for key in sorted_keys:
                 loc = stcs.find(key)
                 if loc > -1:
-                    if loc == 0 or (loc > 0 and stcs[loc-1] == " "):
+                    if loc == 0 or (loc > 0 and (stcs[loc-1] == " " or stcs[loc-1] == "\"") ):
                         stcs = stcs.replace(key, self.name_replace[key])
             f.write(stcs + "\n")
         f.close()
