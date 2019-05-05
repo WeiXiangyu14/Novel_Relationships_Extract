@@ -52,7 +52,7 @@ class RelationExtract:
         f.close()
 
     def extract_sentence(self, path):
-        f = open(self.replace_text_path, 'r')
+        f = open(path, 'r')
         text = f.read()
         text = text.replace("\n\n", "\t")
         text = text.replace("\n", " ")
@@ -110,7 +110,6 @@ class RelationExtract:
         for index, name in enumerate(self.name_list):
             self.name2int[name] = index
             self.int2name[index] = name
-
 
     def get_interest_stcs(self):
         f = open("role_gt_2.txt", "w")
@@ -186,7 +185,7 @@ class RelationExtract:
         return pos, neg
 
     def print_interact(self):
-        f = open("interact.txt", 'w')
+        f = open("interact_dict.txt", 'w')
         f.write(str(self.interact))
         f.close()
 
@@ -238,18 +237,14 @@ class RelationExtract:
                     f.write(name + "\n")
         f.close()
 
-    def get_sentiment_mat(self, senti_dict):
+    def dict_to_mat(self, senti_dict):
         senti_mat = np.zeros((len(self.name_list), len(self.name_list)))
-        for name1 in self.name_list:
-            i = self.name2int[name1]
-            for name2 in self.name_list:
-                if name1 > name2:
-                    name1, name2 = name2, name1
-                j = self.name2int[name2]
-                if (name1, name2) in senti_dict:
-                    senti_mat[i, j] = senti_dict[name1, name2]
-        # TODO: DEBUG, all zero
-        print(senti_mat)
+        for keys in senti_dict:
+            i, j = self.name2int[keys[0]], self.name2int[keys[1]]
+            senti_mat[i, j] = senti_dict[keys]
+            senti_mat[j, i] = senti_dict[keys]
+
+        np.savetxt("interact.txt", senti_mat)
         return senti_mat
 
     @staticmethod
@@ -260,7 +255,7 @@ class RelationExtract:
 
     def cluster_analyze(self, mat):
         mat = np.mat(mat)
-        n_clusters = 3
+        n_clusters = 10
         clusters = SpectralClustering(n_clusters).fit_predict(mat)
         f = open('cluster.txt', 'w')
         for i, cls in enumerate(clusters):
@@ -271,13 +266,12 @@ class RelationExtract:
     def main(self):
         self.clean_text()
         self.get_name_list()
-        self.extract_sentence(self.clean_path)
+        self.extract_sentence(self.replace_text_path)
         # self.get_chapters()
         self.get_interest_stcs()
-        # self.print_interact()
-        interact_mat = self.get_sentiment_mat(self.interact)
-        np.savetxt("interact.txt", interact_mat)
-        # self.cluster_analyze(interact_mat)
+        self.print_interact()
+        interact_mat = self.dict_to_mat(self.interact)
+        self.cluster_analyze(interact_mat)
         plt.matshow(interact_mat)
         plt.show()
 
