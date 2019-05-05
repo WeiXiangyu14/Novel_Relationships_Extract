@@ -16,7 +16,7 @@ ICKLE_DUDLEYKINS: ickle dudleykins
 DRACO_MALFOY: draco malfoy
 DIAGON_ALLEY: diagon alley
 SICKLES: sickles
-MR._RON: ron weasley, ron ron, Mr. ron
+MR._RON: ron weasley, ron ron, Mr. ron, ron
 DENNIS: dennis
 BROWN: brown
 NICK: nick
