@@ -10,10 +10,17 @@ import java.io.*;
 import java.util.*;
 
 public class PeopleNameExtractor {
+    static String removePrefix(String s) {
+        if (s.startsWith("mr.") || s.startsWith("mrs")) return s.substring(3);
+        else if (s.startsWith("mr")) return s.substring(2);
+        else if (s.startsWith("mrs.")) return s.substring(4);
+        else return s;
+    }
+
     static boolean containword(String a, String b) {
         // return whether a contains b
-        a = a.replaceAll("-", " ");
-        b = b.replaceAll("-", " ");
+        a = removePrefix(a).replaceAll("-", " ");
+        b = removePrefix(b).replaceAll("-", " ");
         String[] as = a.split(" ");
         String[] bs = b.split(" ");
         HashSet<String> hs = new HashSet<>(Arrays.asList(as));
@@ -22,6 +29,7 @@ public class PeopleNameExtractor {
         }
         return true;
     }
+
     public static void main(String[] args) {
         String serializedClassifier = "/home/karry/NYU/Spring2019/nlp/assignment/project/stanford-ner/" +
                 "classifiers/english.all.3class.distsim.crf.ser.gz";
@@ -31,7 +39,7 @@ public class PeopleNameExtractor {
 
         Map<String, List<String>> map = new HashMap<>();
         List<List<CoreLabel>> o = classifier.classifyFile(filePath);
-        // HashSet<String> hs = new HashSet<>(), male = new HashSet<>(), female = new HashSet<>();
+        HashSet<String> male = new HashSet<>(), female = new HashSet<>();
         HashMap<String, Integer> names = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         for (List<CoreLabel> sentence : o) {
@@ -39,13 +47,13 @@ public class PeopleNameExtractor {
             for (int i = 0; i < sentence.size(); i++) {
                 CoreLabel word = sentence.get(i);
                 if (word.get(AnswerAnnotation.class).compareTo("PERSON") == 0) {
-//                    if (i > 0 && sentence.get(i - 1).get(AnswerAnnotation.class).compareTo("PERSON") != 0) {
-//                        String mr = sentence.get(i - 1).word().toLowerCase();
-//                        if (mr.compareTo("mr") == 0 || mr.compareTo("mrs") == 0 ||
-//                                mr.compareTo("mr.") == 0 || mr.compareTo("mrs.") == 0) {
-//                            prefix = mr;
-//                        }
-//                    }
+                    if (i > 0 && sentence.get(i - 1).get(AnswerAnnotation.class).compareTo("PERSON") != 0) {
+                        String mr = sentence.get(i - 1).word().toLowerCase();
+                        if (mr.compareTo("mr") == 0 || mr.compareTo("mrs") == 0 ||
+                                mr.compareTo("mr.") == 0 || mr.compareTo("mrs.") == 0) {
+                            prefix = mr;
+                        }
+                    }
                     String w = word.word();
                     if (Character.isLetter(w.charAt(0)) && w.charAt(1) == '.') continue;
                     if (w.compareTo("-") == 0) continue;
@@ -53,13 +61,9 @@ public class PeopleNameExtractor {
                     sb.append(' ');
                 }
                 else if (sb.length() > 0) {
-//                    if (prefix.compareTo("mr") == 0 || prefix.compareTo("mr.") == 0) {
-//                        male.add(sb.toString());
-//                    }
-//                    if (prefix.compareTo("mrs") == 0 || prefix.compareTo("mrs.") == 0) {
-//                        female.add(sb.toString());
-//                    }
                     String t = sb.toString().trim();
+                    if (prefix.equals("mr") || prefix.equals("mr.")) male.add(t);
+                    if (prefix.equals("mrs") || prefix.equals("mrs.")) female.add(t);
                     names.put(t, names.getOrDefault(t, 0) + 1);
                     sb.setLength(0);
                 }
@@ -100,6 +104,21 @@ public class PeopleNameExtractor {
                 map.put(ls.get(i), l);
             }
         }
+        for (List<CoreLabel> sentence : o) {
+            for (CoreLabel word : sentence) {
+                String w = word.word().toLowerCase();
+                if (w.charAt(w.length() - 1) == 's') {
+                    String sub = w.substring(0, w.length() - 1);
+                    if (names.containsKey(sub)) {
+                        names.put(w, names.getOrDefault(w, 0) + 1);
+                        map.put(w, new ArrayList<>());
+                        List<String> l = map.getOrDefault(sub, new ArrayList<>());
+                        l.remove(w);
+                        map.put(sub, l);
+                    }
+                }
+            }
+        }
         Iterator<String> it = map.keySet().iterator();
         while (it.hasNext()) {
             String s = it.next();
@@ -108,7 +127,7 @@ public class PeopleNameExtractor {
                 count += names.get(t);
             }
             count += names.get(s);
-            if (count < 5) it.remove();
+            if (count < 3) it.remove();
         }
 //        // for soundex
 //        List<String> encoded = new ArrayList<>();
@@ -140,6 +159,7 @@ public class PeopleNameExtractor {
             for (Map.Entry<String, List<String>> entry : map.entrySet()) {
                 String s = entry.getKey().trim(), key = s;
                 for (String val : entry.getValue()) {
+                    // TODO: add Mr. and Mrs. as a separate entry when writing to dict
 //                    String t;
 //                    if (female.contains(val)) {
 //                        t = "Mrs. " + val.trim();
@@ -157,6 +177,16 @@ public class PeopleNameExtractor {
                 key = key.replaceAll(" ", "_").toUpperCase();
                 writer.write(key + ": " + s + "\n");
             }
+//            for (String s : male) {
+//                String t = "Mr. " + s.trim();
+//                String key = t.replaceAll(" ", "_");
+//                writer.write(key + ": " + t + "\n");
+//            }
+//            for (String s : female) {
+//                String t = "Mrs. " + s.trim();
+//                String key = t.replaceAll(" ", "_");
+//                writer.write(key + ": " + t + "\n");
+//            }
             writer.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());

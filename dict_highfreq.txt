@@ -3,10 +3,12 @@ QUIRRELL: quirrell
 MADAM_MALKIN: madam malkin
 DUDLEY: dudley
 PERCY: percy
+OLLIVANDERS: ollivanders
 HARRY_POTTER: harry potter, harry
 FLITWICK: flitwick
 NEVILLE: neville
 FRED_WEASLEY: fred weasley, fred
+MARGE: marge
 SEAMUS_FINNIGAN: seamus finnigan, seamus
 GOYLE: goyle
 BANE: bane
@@ -15,14 +17,17 @@ MARCUS_FLINT: marcus flint
 FANG: fang
 OLLIVANDER: ollivander
 BILL: bill
+SLYTHERIN: slytherin
 NORRIS: norris
+GRYFFINDORS: gryffindors
 GEORGE_WEASLEY: george weasley, george
-SLYTHERINS: slytherins, slytherin
+SLYTHERINS: slytherins
 LONGBOTTOM: longbottom
 HAGRID: hagrid
 DEAN: dean
 RONAN: ronan
 WEASLEY: weasley
+GINNY: ginny
 FIGG: figg
 VOLDEMORT: voldemort
 RON: ron
@@ -30,24 +35,33 @@ GRIPHOOK: griphook
 SNAPE: snape
 HUFFLEPUFF: hufflepuff
 MADAM_HOOCH: madam hooch
-DURSLEYS: dursleys, dursley
+HEDWIG: hedwig
+HUFFLEPUFFS: hufflepuffs
+DURSLEYS: dursleys
+DEDALUS_DIGGLE: dedalus diggle
+DURSLEY: dursley
 YEH: yeh
 POTTER: potter
 NORBERT: norbert
+WEASLEYS: weasleys
 UNCLE_VERNON: uncle vernon
 DUMBLEDORE: dumbledore
 KNUTS: knuts
+YES: yes
 VERNON: vernon
 GRINGOTTS: gringotts
 MCGONAGALL: mcgonagall
 ALBUS_DUMBLEDORE: albus dumbledore
 RAVENCLAW: ravenclaw
+OLIVER_WOOD: oliver wood
 NICOLAS_FLAMEL: nicolas flamel
 CRABBE: crabbe
 MALFOY: malfoy
 LEE_JORDAN: lee jordan
+FANGS: fangs
 MADAM_POMFREY: madam pomfrey
 LILY: lily
+POTTERS: potters
 FIRENZE: firenze
 HERMIONE_GRANGER: hermione granger, hermione, granger
 CHARLIE: charlie
