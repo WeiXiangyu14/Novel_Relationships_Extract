@@ -243,10 +243,13 @@ class RelationExtract:
         for name1 in self.name_list:
             i = self.name2int[name1]
             for name2 in self.name_list:
+                if name1 > name2:
+                    name1, name2 = name2, name1
                 j = self.name2int[name2]
                 if (name1, name2) in senti_dict:
                     senti_mat[i, j] = senti_dict[name1, name2]
         # TODO: DEBUG, all zero
+        print(senti_mat)
         return senti_mat
 
     @staticmethod
