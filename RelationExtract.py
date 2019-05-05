@@ -32,6 +32,7 @@ class RelationExtract:
         self.interact = {}  # Count how many times two roles interact.
         self.interact_pos = {}  # Count how many times two roles interact positively.
         self.interact_neg = {}  # Count how many times two roles interact negatively.
+        self.role_freq = {}
         # self.nlp = stanfordnlp.Pipeline(use_gpu=False)
         self.sentim_analyzer = SIA()
 
@@ -125,6 +126,10 @@ class RelationExtract:
                 #     roles.append(name)
                 if stcs.find(name) > -1:
                     roles.append(name)
+                    if name in self.role_freq:
+                        self.role_freq[name] += 1
+                    else:
+                        self.role_freq[name] = 1
                     num_roles += 1
             if num_roles < 2:
                 continue
@@ -265,6 +270,9 @@ class RelationExtract:
         f.close()
         return clusters
 
+    def analyze_mat(self, mat):
+        pass
+
     def main(self):
         self.clean_text()
         self.get_name_list()
@@ -274,7 +282,11 @@ class RelationExtract:
         self.print_dict(self.interact)
         print(len(self.interact))
         interact_mat = self.dict_to_mat(self.interact)
-        self.cluster_analyze(interact_mat)
+        self.analyze_mat(interact_mat)
+        # self.cluster_analyze(interact_mat)
+        self.role_freq = sorted(self.role_freq.items(), key=lambda item: item[1], reverse=True)
+        print(self.role_freq)
+
         plt.matshow(interact_mat)
         plt.show()
 
