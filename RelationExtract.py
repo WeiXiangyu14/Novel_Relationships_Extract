@@ -67,14 +67,14 @@ class RelationExtract:
         f = open("./sentences.txt", "w")
         sorted_keys = list(self.name_replace.keys())
         sorted_keys.sort(key = lambda i:len(i), reverse=True)
-        print(sorted_keys)
         for stcs in sentences:
             stcs = stcs.lower()
             for key in sorted_keys:
                 loc = stcs.find(key)
                 if loc > -1:
                     if loc == 0 or (loc > 0 and (stcs[loc-1] == " " or stcs[loc-1] == "\"") ):
-                        stcs = stcs.replace(key, self.name_replace[key])
+                        if loc + len(key) == len(stcs) - 1 or (loc + len(key) < len(stcs) - 1) and not stcs[loc+len(key)].isalpha():
+                            stcs = stcs.replace(key, self.name_replace[key])
             f.write(stcs + "\n")
         f.close()
         return sentences
@@ -263,7 +263,6 @@ class RelationExtract:
         self.clean_text()
         self.get_name_list()
         self.sentences = self.extract_sentence(self.clean_path)
-        # # self.fine_tuning()
         # self.get_chapters()
         self.get_interest_stcs()
         # self.print_interact()
