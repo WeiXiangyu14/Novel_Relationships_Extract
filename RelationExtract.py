@@ -184,9 +184,10 @@ class RelationExtract:
         neg = analyze["neg"]
         return pos, neg
 
-    def print_interact(self):
+    def print_dict(self, dict):
         f = open("interact_dict.txt", 'w')
-        f.write(str(self.interact))
+        for key in dict:
+            f.write("Key = %s, value = %s\n"%(str(key), str(dict[key])))
         f.close()
 
     def get_chapters(self):     # split text into CHAPTER
@@ -269,7 +270,8 @@ class RelationExtract:
         self.extract_sentence(self.replace_text_path)
         # self.get_chapters()
         self.get_interest_stcs()
-        self.print_interact()
+        self.print_dict(self.interact)
+        print(len(self.interact))
         interact_mat = self.dict_to_mat(self.interact)
         self.cluster_analyze(interact_mat)
         plt.matshow(interact_mat)
