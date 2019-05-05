@@ -71,8 +71,10 @@ class RelationExtract:
         for stcs in sentences:
             stcs = stcs.lower()
             for key in sorted_keys:
-                if stcs.find(key) > -1:
-                    stcs = stcs.replace(key, self.name_replace[key])
+                loc = stcs.find(key)
+                if loc > -1:
+                    if loc == 0 or (loc > 0 and stcs[loc-1] == " "):
+                        stcs = stcs.replace(key, self.name_replace[key])
             f.write(stcs + "\n")
         f.close()
         return sentences
