@@ -44,6 +44,7 @@ public class PeopleNameExtractor {
         StringBuilder sb = new StringBuilder();
         for (List<CoreLabel> sentence : o) {
             String prefix = "";
+            boolean p = false;
             for (int i = 0; i < sentence.size(); i++) {
                 CoreLabel word = sentence.get(i);
                 if (word.get(AnswerAnnotation.class).compareTo("PERSON") == 0) {
@@ -66,6 +67,7 @@ public class PeopleNameExtractor {
                     if (prefix.equals("mrs") || prefix.equals("mrs.")) female.add(t);
                     names.put(t, names.getOrDefault(t, 0) + 1);
                     sb.setLength(0);
+                    prefix = "";
                 }
             }
         }
@@ -177,16 +179,16 @@ public class PeopleNameExtractor {
                 key = key.replaceAll(" ", "_").toUpperCase();
                 writer.write(key + ": " + s + "\n");
             }
-//            for (String s : male) {
-//                String t = "Mr. " + s.trim();
-//                String key = t.replaceAll(" ", "_");
-//                writer.write(key + ": " + t + "\n");
-//            }
-//            for (String s : female) {
-//                String t = "Mrs. " + s.trim();
-//                String key = t.replaceAll(" ", "_");
-//                writer.write(key + ": " + t + "\n");
-//            }
+            for (String s : male) {
+                String t = "Mr. " + s.trim();
+                String key = t.replaceAll(" ", "_");
+                writer.write(key + ": " + t + "\n");
+            }
+            for (String s : female) {
+                String t = "Mrs. " + s.trim();
+                String key = t.replaceAll(" ", "_");
+                writer.write(key + ": " + t + "\n");
+            }
             writer.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());

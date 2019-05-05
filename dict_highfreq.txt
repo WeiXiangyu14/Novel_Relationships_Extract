@@ -65,3 +65,23 @@ POTTERS: potters
 FIRENZE: firenze
 HERMIONE_GRANGER: hermione granger, hermione, granger
 CHARLIE: charlie
+Mr._filch: Mr. filch
+Mr._baron: Mr. baron
+Mr._ollivander: Mr. ollivander
+Mr._neville_longbottom: Mr. neville longbottom
+Mr._harry_potter: Mr. harry potter
+Mr._weasley: Mr. weasley
+Mr._nicolas_flamel: Mr. nicolas flamel
+Mr._ronald_weasley: Mr. ronald weasley
+Mr._malfoy: Mr. malfoy
+Mr._flamel: Mr. flamel
+Mr._paws: Mr. paws
+Mr._dursley: Mr. dursley
+Mr._potter: Mr. potter
+Mr._longbottom: Mr. longbottom
+Mrs._next_door: Mrs. next door
+Mrs._weasley: Mrs. weasley
+Mrs._dursley: Mrs. dursley
+Mrs._figg: Mrs. figg
+Mrs._potter: Mrs. potter
+Mrs._norris: Mrs. norris
