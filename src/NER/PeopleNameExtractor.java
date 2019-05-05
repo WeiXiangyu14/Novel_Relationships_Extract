@@ -30,6 +30,30 @@ public class PeopleNameExtractor {
         return true;
     }
 
+    static void addPrefix(Set<String> s1, Set<String> s2, String prefix, Map<String, List<String>> map) {
+        for (String s : s1) {
+            String key = "";
+            for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+                if (entry.getKey().equals(s) || entry.getValue().contains(s)) {
+                    key = entry.getKey();
+                    break;
+                }
+            }
+            String t = prefix + s.trim();
+            if (!key.isEmpty()) {
+                // we need to add this in map
+                if (s2.contains(s)) {
+                    map.put(t.replaceAll(" ", "_").toUpperCase(), new ArrayList<>());
+                }
+                else {
+                    List<String> l = map.get(key);
+                    l.add(t);
+                    map.put(key, l);
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         String serializedClassifier = "/home/karry/NYU/Spring2019/nlp/assignment/project/stanford-ner/" +
                 "classifiers/english.all.3class.distsim.crf.ser.gz";
@@ -39,7 +63,7 @@ public class PeopleNameExtractor {
 
         Map<String, List<String>> map = new HashMap<>();
         List<List<CoreLabel>> o = classifier.classifyFile(filePath);
-        HashSet<String> male = new HashSet<>(), female = new HashSet<>();
+        Set<String> male = new HashSet<>(), female = new HashSet<>();
         HashMap<String, Integer> names = new HashMap<>();
         StringBuilder sb = new StringBuilder();
         for (List<CoreLabel> sentence : o) {
@@ -158,36 +182,16 @@ public class PeopleNameExtractor {
         try {
             String dictname = "/dict_highfreq.txt";
             BufferedWriter writer = new BufferedWriter(new FileWriter(System.getProperty("user.dir") + dictname));
+            addPrefix(male, female, "Mr. ", map);
+            addPrefix(female, male, "Mrs. ", map);
             for (Map.Entry<String, List<String>> entry : map.entrySet()) {
                 String s = entry.getKey().trim(), key = s;
                 for (String val : entry.getValue()) {
                     // TODO: add Mr. and Mrs. as a separate entry when writing to dict
-//                    String t;
-//                    if (female.contains(val)) {
-//                        t = "Mrs. " + val.trim();
-//                        key = t;
-//                    }
-//                    else if (male.contains(val)) {
-//                        t = "Mr. " + val.trim();
-//                        key = t;
-//                    }
-//                    else {
-//                        t = val.trim();
-//                    }
                     s += (", " + val.trim());
                 }
                 key = key.replaceAll(" ", "_").toUpperCase();
                 writer.write(key + ": " + s + "\n");
-            }
-            for (String s : male) {
-                String t = "Mr. " + s.trim();
-                String key = t.replaceAll(" ", "_");
-                writer.write(key + ": " + t + "\n");
-            }
-            for (String s : female) {
-                String t = "Mrs. " + s.trim();
-                String key = t.replaceAll(" ", "_");
-                writer.write(key + ": " + t + "\n");
             }
             writer.close();
         } catch (Exception e) {

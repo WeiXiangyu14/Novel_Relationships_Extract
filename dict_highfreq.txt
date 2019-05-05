@@ -1,34 +1,38 @@
 DRACO_MALFOY: draco malfoy
 QUIRRELL: quirrell
 MADAM_MALKIN: madam malkin
+MR._WEASLEY: MR._WEASLEY
 DUDLEY: dudley
 PERCY: percy
 OLLIVANDERS: ollivanders
-HARRY_POTTER: harry potter, harry
+HARRY_POTTER: harry potter, harry, Mr. harry potter
 FLITWICK: flitwick
 NEVILLE: neville
 FRED_WEASLEY: fred weasley, fred
 MARGE: marge
+MR._DURSLEY: MR._DURSLEY
 SEAMUS_FINNIGAN: seamus finnigan, seamus
 GOYLE: goyle
 BANE: bane
 WOOD: wood
 MARCUS_FLINT: marcus flint
 FANG: fang
-OLLIVANDER: ollivander
+OLLIVANDER: ollivander, Mr. ollivander
 BILL: bill
 SLYTHERIN: slytherin
-NORRIS: norris
+NORRIS: norris, Mrs. norris
 GRYFFINDORS: gryffindors
 GEORGE_WEASLEY: george weasley, george
+MRS._DURSLEY: MRS._DURSLEY
 SLYTHERINS: slytherins
-LONGBOTTOM: longbottom
+LONGBOTTOM: longbottom, Mr. longbottom
 HAGRID: hagrid
 DEAN: dean
+MRS._POTTER: MRS._POTTER
 RONAN: ronan
 WEASLEY: weasley
 GINNY: ginny
-FIGG: figg
+FIGG: figg, Mrs. figg
 VOLDEMORT: voldemort
 RON: ron
 GRIPHOOK: griphook
@@ -54,9 +58,11 @@ MCGONAGALL: mcgonagall
 ALBUS_DUMBLEDORE: albus dumbledore
 RAVENCLAW: ravenclaw
 OLIVER_WOOD: oliver wood
-NICOLAS_FLAMEL: nicolas flamel
+NICOLAS_FLAMEL: nicolas flamel, Mr. nicolas flamel
+MR._POTTER: MR._POTTER
 CRABBE: crabbe
-MALFOY: malfoy
+MALFOY: malfoy, Mr. malfoy
+MRS._WEASLEY: MRS._WEASLEY
 LEE_JORDAN: lee jordan
 FANGS: fangs
 MADAM_POMFREY: madam pomfrey
@@ -65,23 +71,3 @@ POTTERS: potters
 FIRENZE: firenze
 HERMIONE_GRANGER: hermione granger, hermione, granger
 CHARLIE: charlie
-Mr._filch: Mr. filch
-Mr._baron: Mr. baron
-Mr._ollivander: Mr. ollivander
-Mr._neville_longbottom: Mr. neville longbottom
-Mr._harry_potter: Mr. harry potter
-Mr._weasley: Mr. weasley
-Mr._nicolas_flamel: Mr. nicolas flamel
-Mr._ronald_weasley: Mr. ronald weasley
-Mr._malfoy: Mr. malfoy
-Mr._flamel: Mr. flamel
-Mr._paws: Mr. paws
-Mr._dursley: Mr. dursley
-Mr._potter: Mr. potter
-Mr._longbottom: Mr. longbottom
-Mrs._next_door: Mrs. next door
-Mrs._weasley: Mrs. weasley
-Mrs._dursley: Mrs. dursley
-Mrs._figg: Mrs. figg
-Mrs._potter: Mrs. potter
-Mrs._norris: Mrs. norris
