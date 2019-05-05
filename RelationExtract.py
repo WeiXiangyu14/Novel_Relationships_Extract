@@ -24,6 +24,7 @@ class RelationExtract:
     def __init__(self, path="./Corpus/Harry Potter and the Sorcerer's Stone.txt"):
         self.path = path
         self.clean_path = "./clean_text.txt"
+        self.replace_text_path = "./replaced_text.txt"
         self.name_list = None
         self.sentences = None
         self.interest = []
@@ -51,7 +52,7 @@ class RelationExtract:
         f.close()
 
     def extract_sentence(self, path):
-        f = open(path, 'r')
+        f = open(self.replace_text_path, 'r')
         text = f.read()
         text = text.replace("\n\n", "\t")
         text = text.replace("\n", " ")
@@ -102,7 +103,6 @@ class RelationExtract:
         self.name_list = name_list
         self.name_look_up = lookup
         self.name_replace = replace
-        # TODO: sort the name_replace by key(string), longer 2 shorter
         for index, name in enumerate(self.name_list):
             self.name2int[name] = index
             self.int2name[index] = name
@@ -263,15 +263,14 @@ class RelationExtract:
         self.sentences = self.extract_sentence(self.clean_path)
         # # self.fine_tuning()
         # self.get_chapters()
-        # self.get_interest_stcs()
+        self.get_interest_stcs()
         # self.print_interact()
-        # interact_mat = self.get_sentiment_mat(self.interact)
+        interact_mat = self.get_sentiment_mat(self.interact)
         # self.cluster_analyze(interact_mat)
-        # plt.matshow(interact_mat)
-        # plt.show()
+        plt.matshow(interact_mat)
+        plt.show()
 
 
 if __name__ == '__main__':
     extractor = RelationExtract()
     extractor.main()
-

@@ -20,7 +20,7 @@ MR._RON: ron weasley, ron ron, Mr. ron
 DENNIS: dennis
 BROWN: brown
 NICK: nick
-HARRY_POTTER: harry potter
+HARRY_POTTER: harry potter, harry
 LEE_JORDAN: lee jordan, lee, jordan
 FANG: fang
 HERMIONE_GRANGER: hermione granger
