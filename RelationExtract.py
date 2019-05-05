@@ -255,6 +255,7 @@ class RelationExtract:
         return im
 
     def cluster_analyze(self, mat):
+            # TODO: sparse subspace clustering
         mat = np.mat(mat)
         n_clusters = 10
         clusters = SpectralClustering(n_clusters).fit_predict(mat)
