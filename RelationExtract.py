@@ -63,7 +63,7 @@ class RelationExtract:
         f.close()
         sentences = nltk.tokenize.sent_tokenize(text)
         print("Totally ", len(sentences), "sentences.")
-
+        self.sentences = []
         f = open("./sentences.txt", "w")
         sorted_keys = list(self.name_replace.keys())
         sorted_keys.sort(key = lambda i:len(i), reverse=True)
@@ -77,8 +77,8 @@ class RelationExtract:
                     if loc + len(key) == len(stcs) - 1 or (loc + len(key) < len(stcs) - 1) and not stcs[loc+len(key)].isalpha():
                         stcs = stcs.replace(key, self.name_replace[key])
             f.write(stcs + "\n")
+            self.sentences.append(stcs)
         f.close()
-        return sentences
 
     def get_name_list(self):
         f = open("./Corpus/namelist.txt")
@@ -104,6 +104,7 @@ class RelationExtract:
             lookup[name] = equal
 
         self.name_list = name_list
+        self.name_list.sort(key = lambda i:len(i), reverse=True)
         self.name_look_up = lookup
         self.name_replace = replace
         for index, name in enumerate(self.name_list):
@@ -120,9 +121,12 @@ class RelationExtract:
             roles = []  # Stores the roles show up in this sentence
             stcs_list = stcs.split()
             for name in self.name_list:
-                if name in stcs_list:
-                    num_roles += 1
+                # if name in stcs_list:
+                #     num_roles += 1
+                #     roles.append(name)
+                if stcs.find(name) > -1:
                     roles.append(name)
+                    num_roles += 1
             if num_roles < 2:
                 continue
 
@@ -242,6 +246,7 @@ class RelationExtract:
                 j = self.name2int[name2]
                 if (name1, name2) in senti_dict:
                     senti_mat[i, j] = senti_dict[name1, name2]
+        # TODO: DEBUG, all zero
         return senti_mat
 
     @staticmethod
@@ -263,11 +268,12 @@ class RelationExtract:
     def main(self):
         self.clean_text()
         self.get_name_list()
-        self.sentences = self.extract_sentence(self.clean_path)
+        self.extract_sentence(self.clean_path)
         # self.get_chapters()
         self.get_interest_stcs()
         # self.print_interact()
         interact_mat = self.get_sentiment_mat(self.interact)
+        np.savetxt("interact.txt", interact_mat)
         # self.cluster_analyze(interact_mat)
         plt.matshow(interact_mat)
         plt.show()
