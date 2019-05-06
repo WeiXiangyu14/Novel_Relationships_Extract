@@ -32,7 +32,7 @@ class RelationExtract:
         self.interact_neg = {}  # Count how many times two roles interact negatively.
         self.role_freq = {}
         self.interact_mat = None
-        self.nlp = stanfordnlp.Pipeline(use_gpu=False)
+        self.nlp = stanfordnlp.Pipeline(use_gpu=True)
         self.sentim_analyzer = SIA()
 
         self.name2int = {}
@@ -45,6 +45,10 @@ class RelationExtract:
         self.connected_graph = None
         self.ori2sub = {} # node lookup table from origin to sub mat
         self.sub2ori = {} # node lookup table from sub to origin mat
+
+        self.interact_pos_mat = None
+        self.interact_neg_mat = None
+        self.senti_relationship = None
 
     def clean_text(self):
         f = open(self.path, "r")
@@ -339,7 +343,6 @@ class RelationExtract:
                     mat[i, j] /= self.interact_mat[i, j]
         return mat
 
-
     def main(self):
         self.clean_text()
         self.get_name_list()
@@ -366,7 +369,6 @@ class RelationExtract:
         self.interact_pos_mat = self.get_weighted_mat(self.interact_pos, "interact_pos.txt")
         self.interact_neg_mat = self.get_weighted_mat(self.interact_neg, "interact_neg.txt")
 
-
         self.senti_relationship = self.interact_pos_mat - self.interact_neg_mat
 
         np.savetxt("senti_pos_neg.txt", self.senti_relationship)
@@ -375,8 +377,7 @@ class RelationExtract:
         # plt.matshow(self.interact_neg_mat)
 
         plt.show()
-        self.cluster_analyze(self.senti_relationship , n=2)
-
+        self.cluster_analyze(self.senti_relationship, n=2)
 
 
 if __name__ == '__main__':
