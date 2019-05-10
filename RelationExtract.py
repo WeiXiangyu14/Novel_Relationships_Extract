@@ -21,10 +21,11 @@ def download_corpus():
 
 
 class RelationExtract:
-    def __init__(self, path="./Corpus/Harry Potter and the Sorcerer's Stone.txt"):
+    def __init__(self, path="./Corpus/Harry Potter and the Sorcerer's Stone.txt", use_dependency=False):
         self.path = path
         self.clean_path = "./clean_text.txt"
         self.replace_text_path = "./replaced_text.txt"
+        self.use_dependency = use_dependency
         self.name_list = None
         self.sentences = None
         self.interact = {}  # Count how many times two roles interact.
@@ -32,7 +33,11 @@ class RelationExtract:
         self.interact_neg = {}  # Count how many times two roles interact negatively.
         self.role_freq = {}
         self.interact_mat = None
-        self.nlp = stanfordnlp.Pipeline(use_gpu=True)
+
+        self.nlp = None
+        if self.use_dependency:
+            self.nlp = stanfordnlp.Pipeline(use_gpu=False)
+
         self.sentim_analyzer = SIA()
 
         self.name2int = {}
@@ -150,10 +155,14 @@ class RelationExtract:
                 continue
 
             role_gt_2.append(stcs)
-            # doc = self.nlp(stcs)
 
-            # pos, neg = self.sentiment_analysis(stcs)
-            pos, neg = self.sentiment_analysis_keyword(stcs)
+            if self.use_dependency:
+                doc = self.nlp(stcs)
+
+            if self.use_dependency:
+                pos, neg = self.sentiment_analysis_keyword(stcs)
+            else:
+                pos, neg = self.sentiment_analysis(stcs)
 
             nsubj = []
             obj = []
@@ -381,5 +390,5 @@ class RelationExtract:
 
 
 if __name__ == '__main__':
-    extractor = RelationExtract()
+    extractor = RelationExtract(use_dependency=False)
     extractor.main()
