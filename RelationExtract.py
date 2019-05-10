@@ -369,7 +369,7 @@ class RelationExtract:
 
             major.append(max_index)
 
-            if len(major) > 5:
+            if max < 100:
                 break
 
         for id in major:
