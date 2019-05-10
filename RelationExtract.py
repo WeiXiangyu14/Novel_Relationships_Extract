@@ -352,6 +352,31 @@ class RelationExtract:
                     mat[i, j] /= self.interact_mat[i, j]
         return mat
 
+    def resolve_mat(self, senti_mat):
+        major = [self.name2int[self.role_freq[0][0]]]
+
+        while True:
+            i = major[-1]
+
+            max = -1
+            max_index = -1
+            vec = senti_mat[i,:]
+            for j in range(len(vec)):
+                if j not in major:
+                    if vec[j] > max:
+                        max = vec[j]
+                        max_index = j
+
+            major.append(max_index)
+
+            if len(major) > 5:
+                break
+
+        for id in major:
+            print(self.int2name[id], end="; ")
+        print()
+
+
     def main(self):
         self.clean_text()
         self.get_name_list()
@@ -382,10 +407,11 @@ class RelationExtract:
 
         np.savetxt("senti_pos_neg.txt", self.senti_relationship)
 
-        plt.matshow(self.senti_relationship)
+        # plt.matshow(self.senti_relationship)
         # plt.matshow(self.interact_neg_mat)
+        # plt.show()
+        self.resolve_mat(senti_mat=self.interact_mat)
 
-        plt.show()
         self.cluster_analyze(self.senti_relationship, n=2)
 
 
