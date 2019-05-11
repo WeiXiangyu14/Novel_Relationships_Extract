@@ -343,8 +343,22 @@ class RelationExtract:
                     self.DFS(i, ret, mat)
         return ret
 
-    def get_weighted_mat(self, dict, path):
+    def get_weighted_mat(self, dict, path, mean=False):
         mat = self.dict_to_mat(dict, path=path)
+        if not mean:
+            return mat
+        n = len(self.name_list)
+        for i in range(n):
+            for j in range(n):
+                if self.interact_mat[i, j] > 0:
+                    mat[i, j] /= self.interact_mat[i, j]
+        return mat
+
+
+    def load_mat(self, path, mean=False):
+        mat = np.loadtxt(path)
+        if not mean:
+            return mat
         n = len(self.name_list)
         for i in range(n):
             for j in range(n):
@@ -354,10 +368,8 @@ class RelationExtract:
 
     def resolve_mat(self, senti_mat):
         major = [self.name2int[self.role_freq[0][0]]]
-
         while True:
             i = major[-1]
-
             max = -1
             max_index = -1
             vec = senti_mat[i,:]
@@ -368,8 +380,9 @@ class RelationExtract:
                         max_index = j
 
             major.append(max_index)
-
-            if max < 100:
+            # if max < 50:
+            #     break
+            if len(major) > 5:
                 break
 
         for id in major:
@@ -403,18 +416,39 @@ class RelationExtract:
         self.interact_pos_mat = self.get_weighted_mat(self.interact_pos, "interact_pos.txt")
         self.interact_neg_mat = self.get_weighted_mat(self.interact_neg, "interact_neg.txt")
 
+        self.interact_pos_mat_mean = self.get_weighted_mat(self.interact_pos, "interact_pos.txt", mean=False)
+        self.interact_neg_mat_mean = self.get_weighted_mat(self.interact_neg, "interact_neg.txt", mean=False)
+
         self.senti_relationship = self.interact_pos_mat - self.interact_neg_mat
 
+
+
         np.savetxt("senti_pos_neg.txt", self.senti_relationship)
+
+        if self.use_dependency:
+            np.savetxt("pos_denpency.txt", self.interact_pos_mat)
+            np.savetxt("neg_denpency.txt", self.interact_neg_mat)
 
         # plt.matshow(self.senti_relationship)
         # plt.matshow(self.interact_neg_mat)
         # plt.show()
-        self.resolve_mat(senti_mat=self.interact_mat)
+        # self.resolve_mat(senti_mat=self.interact_neg_mat)
 
         self.cluster_analyze(self.senti_relationship, n=2)
 
+    def load_and_analyze(self):
+        self.interact_pos_mat = np.loadtxt("pos_denpency.txt")
+        self.interact_neg_mat = np.loadtxt("neg_denpency.txt")
+
+        # self.interact_pos_mat = np.loadtxt("interact_pos.txt")
+        # self.interact_neg_mat = np.loadtxt("interact_neg.txt")
+
+        self.interact_pos_mat_mean = self.load_mat(path="pos_denpency.txt", mean=True)
+        self.interact_neg_mat_mean = self.load_mat(path="neg_denpency.txt", mean=True)
+
+        self.resolve_mat(self.interact_pos_mat)
 
 if __name__ == '__main__':
     extractor = RelationExtract(use_dependency=False)
     extractor.main()
+    extractor.load_and_analyze()
