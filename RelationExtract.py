@@ -10,6 +10,8 @@ import PIL
 from PIL import Image
 import matplotlib.pyplot as plt
 from sklearn.cluster import SpectralClustering
+import matplotlib
+from MatShow import mat_show
 
 
 def download_corpus():
@@ -369,25 +371,49 @@ class RelationExtract:
     def resolve_mat(self, senti_mat):
         major = [self.name2int[self.role_freq[0][0]]]
         while True:
-            i = major[-1]
-            max = -1
-            max_index = -1
-            vec = senti_mat[i,:]
-            for j in range(len(vec)):
+            _max = -1
+            _max_index = -1
+            for j in range(len(self.name_list)):
                 if j not in major:
-                    if vec[j] > max:
-                        max = vec[j]
-                        max_index = j
+                    sum = 0
+                    for i in major:
+                        # sum += senti_mat[i, j]
+                        sum = max(senti_mat[i,j], sum)
+                    if sum > _max:
+                        _max = sum
+                        _max_index = j
+            major.append(_max_index)
 
-            major.append(max_index)
-            # if max < 50:
-            #     break
-            if len(major) > 5:
+            if len(major) > 7:
                 break
-
         for id in major:
             print(self.int2name[id], end="; ")
         print()
+
+    def prim(self, senti_mat):
+        major = [self.name2int[self.role_freq[0][0]]]
+        while True:
+            _max = -1
+            _max_index = -1
+            for j in range(len(self.name_list)):
+                if j not in major:
+                    sum = 0
+                    for i in major:
+                        # sum += senti_mat[i, j]
+                        sum = max(senti_mat[i,j], sum)
+                    if sum > _max:
+                        _max = sum
+                        _max_index = j
+            major.append(_max_index)
+
+            if len(major) > 7:
+                break
+        for id in major:
+            print(self.int2name[id], end="; ")
+        print()
+
+    def mat_show(self, name_map, mat, path):
+        mat_show(mat, name_map, name_map, path)
 
 
     def main(self):
@@ -410,17 +436,44 @@ class RelationExtract:
         submat = self.connected_graph.copy()
         submat[submat > 0] = 1
         submat[submat <= 0] = 0
-        # plt.matshow(submat)
-        # plt.show()
 
         self.interact_pos_mat = self.get_weighted_mat(self.interact_pos, "interact_pos.txt")
         self.interact_neg_mat = self.get_weighted_mat(self.interact_neg, "interact_neg.txt")
 
-        self.interact_pos_mat_mean = self.get_weighted_mat(self.interact_pos, "interact_pos.txt", mean=False)
-        self.interact_neg_mat_mean = self.get_weighted_mat(self.interact_neg, "interact_neg.txt", mean=False)
+        self.interact_pos_mat_mean = self.get_weighted_mat(self.interact_pos, "interact_pos.txt", mean=True)
+        self.interact_neg_mat_mean = self.get_weighted_mat(self.interact_neg, "interact_neg.txt", mean=True)
+
+
+
+        name_map = [self.int2name[i] for i in range(len(self.name_list))]
+
+
 
         self.senti_relationship = self.interact_pos_mat - self.interact_neg_mat
+        # plt.matshow(self.senti_relationship)
+        # plt.show()
+        # plt.savefig("senti.jpg")
 
+        self.senti_mean = self.interact_pos_mat_mean - self.interact_neg_mat_mean
+        # plt.matshow(self.senti_mean)
+        # plt.savefig("senti_mean.jpg")
+        #
+        # plt.matshow(self.interact_pos_mat)
+        # plt.savefig("pos.jpg")
+        #
+        # plt.matshow(self.interact_neg_mat)
+        # plt.savefig()
+
+        self.mat_show(name_map=name_map, mat=self.interact_pos_mat, path="pos.jpg")
+        self.mat_show(name_map=name_map, mat=self.interact_neg_mat, path="neg.jpg")
+        self.mat_show(name_map=name_map, mat=self.interact_pos_mat_mean, path="pos_mean.jpg")
+        self.mat_show(name_map=name_map, mat=self.interact_neg_mat_mean, path="neg_mean.jpg")
+
+        # plt.matshow(self.interact_pos_mat_mean)
+        # plt.savefig("pos_mean.jpg")
+        #
+        # plt.matshow(self.interact_neg_mat_mean)
+        # plt.savefig("neg_mean.jpg")
 
 
         np.savetxt("senti_pos_neg.txt", self.senti_relationship)
@@ -434,7 +487,11 @@ class RelationExtract:
         # plt.show()
         # self.resolve_mat(senti_mat=self.interact_neg_mat)
 
+        self.mat_show(name_map=name_map, mat=self.senti_relationship, path="senti_pos_neg.jpg")
+
+        self.prim(self.interact_mat)
         self.cluster_analyze(self.senti_relationship, n=2)
+
 
     def load_and_analyze(self):
         self.interact_pos_mat = np.loadtxt("pos_denpency.txt")
@@ -446,9 +503,12 @@ class RelationExtract:
         self.interact_pos_mat_mean = self.load_mat(path="pos_denpency.txt", mean=True)
         self.interact_neg_mat_mean = self.load_mat(path="neg_denpency.txt", mean=True)
 
-        self.resolve_mat(self.interact_pos_mat)
+        self.senti_relationship = self.interact_pos_mat
+
+        # self.cluster_analyze(self.senti_relationship, n=3)
+        self.resolve_mat(self.senti_relationship)
 
 if __name__ == '__main__':
     extractor = RelationExtract(use_dependency=False)
     extractor.main()
-    extractor.load_and_analyze()
+    # extractor.load_and_analyze()
