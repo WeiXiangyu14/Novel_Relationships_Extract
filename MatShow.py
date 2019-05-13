@@ -10,6 +10,8 @@ def mat_show(harvest, vegetables, farmers, path="default.jpg"):
     # We want to show all ticks...
     ax.set_xticks(np.arange(len(farmers)))
     ax.set_yticks(np.arange(len(vegetables)))
+    plt.xticks(fontsize=4)
+    plt.yticks(fontsize=4)
     # ... and label them with the respective list entries
     ax.set_xticklabels(farmers)
     ax.set_yticklabels(vegetables)
@@ -18,12 +20,11 @@ def mat_show(harvest, vegetables, farmers, path="default.jpg"):
     plt.colorbar(im)
 
     # Rotate the tick labels and set their alignment.
-    plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
+    plt.setp(ax.get_xticklabels(), rotation=90, ha="right",
              rotation_mode="anchor")
     ax.set_title(path)
     fig.tight_layout()
-
-    plt.savefig("./jpg/"+path)
+    plt.savefig("./jpg/"+path, dpi=200)
     # plt.show()
 
 

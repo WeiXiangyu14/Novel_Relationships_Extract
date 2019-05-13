@@ -464,10 +464,10 @@ class RelationExtract:
         # plt.matshow(self.interact_neg_mat)
         # plt.savefig()
 
-        self.mat_show(name_map=name_map, mat=self.interact_pos_mat, path="pos.jpg")
-        self.mat_show(name_map=name_map, mat=self.interact_neg_mat, path="neg.jpg")
-        self.mat_show(name_map=name_map, mat=self.interact_pos_mat_mean, path="pos_mean.jpg")
-        self.mat_show(name_map=name_map, mat=self.interact_neg_mat_mean, path="neg_mean.jpg")
+        # self.mat_show(name_map=name_map, mat=self.interact_pos_mat, path="pos.jpg")
+        # self.mat_show(name_map=name_map, mat=self.interact_neg_mat, path="neg.jpg")
+        # self.mat_show(name_map=name_map, mat=self.interact_pos_mat_mean, path="pos_mean.jpg")
+        # self.mat_show(name_map=name_map, mat=self.interact_neg_mat_mean, path="neg_mean.jpg")
 
         # plt.matshow(self.interact_pos_mat_mean)
         # plt.savefig("pos_mean.jpg")
@@ -488,6 +488,8 @@ class RelationExtract:
         # self.resolve_mat(senti_mat=self.interact_neg_mat)
 
         self.mat_show(name_map=name_map, mat=self.senti_relationship, path="senti_pos_neg.jpg")
+        self.mat_show(name_map=name_map, mat=self.senti_mean, path="senti_pos_neg_mean.jpg")
+
 
         self.prim(self.interact_mat)
         self.cluster_analyze(self.senti_relationship, n=2)
