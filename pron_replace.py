@@ -410,8 +410,8 @@ class NovelAnalyzer:
             s_doc = s.as_doc()
             s_ents = s_doc.ents
 
-
-
+            s_t = s.text
+            words = s_t.split()
 
             s_people = []
             for e in s_ents:
@@ -420,6 +420,25 @@ class NovelAnalyzer:
                         s_people.append(e.text.lower())
 
             # print(s_people)
+            for p1 in s_people:
+                i1 = -1
+                for i in len(words):
+                    if words[i].lower() == p1:
+                        i1 = i
+                for p2 in s_people:
+                    if p1 != p2:
+                        i2 = -1
+                        for i in len(words):
+                            if words[i].lower() == p2:
+                                i2 = i
+                        for i in range(i1-4, i2+4):
+                            if i < 0:
+                                continue
+                            if i > len(words)-1:
+                                break
+                            if words[i].lower() in self.relation_context:
+                                self.relations[words[i].lower()].append((p1, p2))
+
 
             useful_people = []
             temp_people = []
@@ -429,10 +448,7 @@ class NovelAnalyzer:
                     temp_people.append(p)
 
 
-            s_t = s.text
-            # print(s_t)
-            # print(useful_people)
-            words = s_t.split()
+
             if len(words) > 0:
                 for p in temp_people:
                     for i in range(1, len(words)):
@@ -441,6 +457,8 @@ class NovelAnalyzer:
                                 useful_people.append(words[i-1].lower() + " " +p)
 
             useful_people = list(set(useful_people))
+
+
 
             if len(useful_people) < 2:
                 continue
