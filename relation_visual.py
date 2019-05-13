@@ -35,23 +35,9 @@ def relation_name(n1, n2, r):
 
 def graph_base() -> Graph:
 
-    # f = open("relation_pap", "rb")
-    # dic = pickle.load(f)
+    f = open("relation_pap", "rb")
+    dic = pickle.load(f)
 
-    dic = { "child": [],
-            "father": [("mrdursley", "dudley")],
-            "mother": [("mrsdursley", "dudley"), ("mrsweasley", "ron"), ("mrsweasley", "george"), ("mrsweasley", "charlie"), ("mrsweasley", "ginny")],
-            "grantparent": [],
-            "brothers": [("charlie", "ron"), ("george", "charlie"), ("ron", "george")],
-            "sisters": [("ginny", "ron"), ("ginny", "charlie"), ("ginny", "george")],
-            "classmates": [],
-            "friends": [],
-            "co-workers": [],
-            "teacher": [],
-            "lover": [],
-            "wife": [("mrsdursley", "mrdursley")],
-            "husband": [("mrdursley", "mrsdursley")]
-            }
 
     used_names = []
     for r in dic:
