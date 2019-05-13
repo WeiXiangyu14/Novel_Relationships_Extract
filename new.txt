@@ -7892,7 +7892,8 @@ to Harry senses. Harry couldn't stay here, Harry had to find Harry way back
 to bed. Harry tore Harry eyes away from Harry mother's face, whispered,
 "I'll come back," and hurried from the room.
 
-    "You could have woken me up," said    Ron, crossly.
+    "You could have woken me up," said
+    +Ron, crossly.
 
     "You can come tonight, I'm going back, I want to show you
 the mirror.
@@ -8321,7 +8322,7 @@ still discussing what Harry and Ron'd do with the Sorcerer's Stone if Harry and 
 one. It wasn't until    Ron said    Ron'd buy    Ron own Quidditch team that
 Harry remembered about Snape and the coming match.
 
-    "I'm going to play," Snape told Ron and Hermione. "If I don't, all
+    "I'm going to play," Harry told Ron and Hermione. "If I don't, all
 the Slytherins will think I'm just too scared to face Snape. I'll
 show all
 the Slytherins... it'll really wipe the smiles off all
@@ -11514,7 +11515,7 @@ Madam Pomfrey..."
 
     And Madam Pomfrey let Ron and Hermione in.
 
-     Harry!"
+     "Harry!"
 
     Hermione looked ready to fling    Hermione arms around    Hermione again, but
 Harry was glad    Hermione held    Hermione in as Harry head was still very sore.
@@ -11576,9 +11577,7 @@ Ravenclaw without you -- but the food'll be good."
 ," Harry told Madam Pomfrey as Madam Pomfrey
 straightened Harry many candy boxes. I can, can't I?"
 
-    ""
-
-    Dumbledore says you are to be allowed to go," Madam Pomfrey
+    "Dumbledore says you are to be allowed to go," Madam Pomfrey
 said stiffily, as though in Madam Pomfrey opinion Professor Dumbledore didn't
 realize how risky feasts could be. "And you have another visitor."
 
@@ -11777,7 +11776,7 @@ he is, Mom, there he is, look!"
     It was Ginny Weasley, Ron's younger sister, but she wasn't
 pointing at Ron.
 
-     Harry Potter!" she squealed. "Look, Mom! I can see
+    "Harry Potter!" she squealed. "Look, Mom! I can see
 
     "Be quiet, Ginny, and it's rude to point."
 

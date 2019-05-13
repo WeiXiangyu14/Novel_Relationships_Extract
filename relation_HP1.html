@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Awesome-pyecharts</title>
+            <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+
+</head>
+<body>
+    <div id="6dbb5901b2684468b5719b54618fee26" style="width:1800px; height:900px;"></div>
+    <script>
+        var chart_6dbb5901b2684468b5719b54618fee26 = echarts.init(
+            document.getElementById('6dbb5901b2684468b5719b54618fee26'), 'white', {renderer: 'canvas'});
+        var option_6dbb5901b2684468b5719b54618fee26 = {
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597"
+    ],
+    "series": [
+        {
+            "type": "graph",
+            "layout": "force",
+            "circular": {
+                "rotateLabel": false
+            },
+            "force": {
+                "repulsion": 6000,
+                "edgeLength": 50,
+                "gravity": 0.2
+            },
+            "label": {
+                "show": true,
+                "position": "top",
+                "fontSize": 12
+            },
+            "lineStyle": {
+                "width": 1,
+                "opacity": 1,
+                "curveness": 0,
+                "type": "solid"
+            },
+            "roam": true,
+            "focusNodeAdjacency": true,
+            "data": [
+                {
+                    "name": "Mr. Dursley",
+                    "fixed": false,
+                    "symbolSize": 40
+                },
+                {
+                    "name": "Dudley",
+                    "fixed": false,
+                    "symbolSize": 40
+                },
+                {
+                    "name": "Mrs. Dursley",
+                    "fixed": false,
+                    "symbolSize": 40
+                },
+                {
+                    "name": "Mrs. Weasley",
+                    "fixed": false,
+                    "symbolSize": 40
+                },
+                {
+                    "name": "Ron",
+                    "fixed": false,
+                    "symbolSize": 40
+                },
+                {
+                    "name": "George",
+                    "fixed": false,
+                    "symbolSize": 40
+                },
+                {
+                    "name": "Charlie",
+                    "fixed": false,
+                    "symbolSize": 40
+                },
+                {
+                    "name": "Ginny",
+                    "fixed": false,
+                    "symbolSize": 40
+                },
+                {
+                    "name": "Mr. Dursley is Dudley's father",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Mrs. Weasley is Ginny's mother",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Mrs. Dursley is Dudley's mother",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Mrs. Weasley is George's mother",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Mrs. Weasley is Charlie's mother",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Mrs. Weasley is Ron's mother",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Charlie is Ron's brother",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "George is Charlie's brother",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Ron is George's brother",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Ginny is Ron's sister",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Ginny is Charlie's sister",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Ginny is George's sister",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Mrs. Dursley is Mr. Dursley's wife",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                },
+                {
+                    "name": "Mr. Dursley is Mrs. Dursley's husband",
+                    "fixed": false,
+                    "symbol": "rect",
+                    "symbolSize": 10
+                }
+            ],
+            "edgeSymbol": [
+                null,
+                null
+            ],
+            "edgeSymbolSize": 10,
+            "links": [
+                {
+                    "source": "Mr. Dursley",
+                    "target": "Mr. Dursley is Dudley's father",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Dudley",
+                    "target": "Mr. Dursley is Dudley's father",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Mrs. Weasley",
+                    "target": "Mrs. Weasley is Ginny's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Ginny",
+                    "target": "Mrs. Weasley is Ginny's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Mrs. Dursley",
+                    "target": "Mrs. Dursley is Dudley's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Dudley",
+                    "target": "Mrs. Dursley is Dudley's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Mrs. Weasley",
+                    "target": "Mrs. Weasley is George's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "George",
+                    "target": "Mrs. Weasley is George's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Mrs. Weasley",
+                    "target": "Mrs. Weasley is Charlie's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Charlie",
+                    "target": "Mrs. Weasley is Charlie's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Mrs. Weasley",
+                    "target": "Mrs. Weasley is Ron's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Ron",
+                    "target": "Mrs. Weasley is Ron's mother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Charlie",
+                    "target": "Charlie is Ron's brother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Ron",
+                    "target": "Charlie is Ron's brother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "George",
+                    "target": "George is Charlie's brother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Charlie",
+                    "target": "George is Charlie's brother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Ron",
+                    "target": "Ron is George's brother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "George",
+                    "target": "Ron is George's brother",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Ginny",
+                    "target": "Ginny is Ron's sister",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Ron",
+                    "target": "Ginny is Ron's sister",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Ginny",
+                    "target": "Ginny is Charlie's sister",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Charlie",
+                    "target": "Ginny is Charlie's sister",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Ginny",
+                    "target": "Ginny is George's sister",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "George",
+                    "target": "Ginny is George's sister",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Mrs. Dursley",
+                    "target": "Mrs. Dursley is Mr. Dursley's wife",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Mr. Dursley",
+                    "target": "Mrs. Dursley is Mr. Dursley's wife",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Mr. Dursley",
+                    "target": "Mr. Dursley is Mrs. Dursley's husband",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                },
+                {
+                    "source": "Mrs. Dursley",
+                    "target": "Mr. Dursley is Mrs. Dursley's husband",
+                    "lineStyle": {
+                        "width": 5,
+                        "opacity": 1,
+                        "curveness": 0,
+                        "type": "solid"
+                    }
+                }
+            ]
+        }
+    ],
+    "legend": [
+        {
+            "data": [],
+            "selected": {},
+            "show": true
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0
+    },
+    "title": [
+        {
+            "text": "Relationship in Harry Potter"
+        }
+    ]
+};
+        chart_6dbb5901b2684468b5719b54618fee26.setOption(option_6dbb5901b2684468b5719b54618fee26);
+    </script>
+</body>
+</html>
