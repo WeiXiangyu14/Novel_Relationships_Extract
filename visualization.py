@@ -40,13 +40,7 @@ def graph_base() -> Graph:
 
 
 
-    nodes = [
-        # opts.GraphNode(name="结点1", symbol_size=10),
-        # opts.GraphNode(name="结点2", symbol_size=20),
-        # opts.GraphNode(name="结点3", symbol_size=30),
-        # opts.GraphNode(name="结点4", symbol_size=40),
-        # opts.GraphNode(name="结点5", symbol_size=50),
-    ]
+    nodes = []
 
     for k in dic:
         if k:
@@ -54,13 +48,7 @@ def graph_base() -> Graph:
                 if num_dic[k] > 0:
                     nodes.append(opts.GraphNode(name=k, value=str(num_dic[k]), symbol_size = calcsize(num_dic[k])))
 
-    links = [
-        # opts.GraphLink(source="结点1", target="结点2", value=30, linestyle_opts= opts.LineStyleOpts(width=10)),
-        # opts.GraphLink(source="结点2", target="结点3"),
-        # opts.GraphLink(source="结点3", target="结点4"),
-        # opts.GraphLink(source="结点4", target="结点5"),
-        # opts.GraphLink(source="结点5", target="结点1"),
-    ]
+    links = []
 
     for k1 in dic:
         for k2 in dic[k1]:
